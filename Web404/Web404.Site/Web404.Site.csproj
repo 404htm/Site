@@ -131,9 +131,7 @@
     <Content Include="Images\Icons\Contact\email.png" />
     <Content Include="Images\Icons\Contact\github.png" />
     <Content Include="Images\Icons\Contact\linkedin.png" />
-    <Content Include="Images\Icons\Contact\meetup.png" />
     <Content Include="Images\Icons\Contact\stackoverflow.png" />
-    <Content Include="Images\Icons\Contact\twitter.png" />
     <Content Include="Images\Icons\Home.png" />
     <Content Include="Images\pattern10.jpg" />
     <Content Include="LICENSE.txt" />
