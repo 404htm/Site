@@ -1,0 +1,263 @@
+﻿body {
+    font-size: 14pt;
+    font-family: 'Sintony', sans-serif;
+    color: white;
+    background-color: #232323;
+    background-repeat: repeat;
+    background-image: url(../Images/pattern10.jpg);
+	 /*background-image: url(../Images/circuits.png);	*/
+    background-attachment: fixed;
+}
+
+header, footer, nav, section {
+    display: block;
+    
+}
+
+nav ul {
+    display: block;
+    height: 25px;
+    padding: 0;
+    margin: 0 0 3px 0;
+}
+
+nav li {
+    list-style: none;
+    border-right: 2px solid white;
+    float: left;
+}
+
+nav li:last-child {
+    border-right: none;
+}
+
+nav li:first-child a{
+    padding-left: 0;
+}
+
+nav li a {
+    color: white;
+    text-decoration: none;
+    height: 100%;
+    padding: 0 10px 0 10px;
+}
+
+nav li a:hover {
+    color: #3e85fb;
+    /*background-color: #444444;*/
+}
+
+#home, #tools, #projects, #contact {
+    display: block;
+    /*padding-left: 25px;*/
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+#home, #tools, #projects, #contact {
+    /*background-image: url(../Images/Icons/Home.png);*/
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+article {
+    width: auto;
+    float: left;
+}
+
+#sidebar {
+    float: right;
+    width: 400px;
+    background-color:  #333333;
+    height: 1000px;
+    margin: 1em;
+    padding: 1em;
+}
+
+header {
+    margin: 1em;
+    border-bottom: 1px solid white;
+}
+
+
+
+.section {
+	display: block;
+   	color: silver;
+    padding: 0;
+    margin: 0 1em 1.5em 1em;
+	background-color: #333333;
+	box-shadow: 0px 0px 20px #111111;
+	max-width: 1200px;
+}
+
+.section div.content{
+	margin: 1em;
+}
+
+.section h3 {
+	display: block;
+	color: white;
+	margin: 0;
+    font-size: 1em;
+	font-weight: normal;
+    background-color: #002c52;
+	width: auto;
+	
+	padding: 0 5px 0 5px;
+}
+
+
+.footer-top{
+	display: block;
+	margin: 0;
+    
+    background-color: black;
+	width: auto;
+	padding: 0 5px 0 5px;
+	
+	height: 30px;
+	line-height: 30px;
+}
+
+.section.footer {
+	background-color: rgba(50,50,50,.5);
+	height: 150px;
+	font-size: 12pt;
+	font-weight: normal;
+	color: silver;
+	margin-bottom: 0px;
+}
+
+.section.footer h4 {
+	font-size: 13px;
+	font-weight: normal;
+	margin: 2px;
+}
+
+	.section.footer ul {
+	list-style: none;
+	}
+
+.column {
+	border-right: 1px solid gray;
+	float: left;
+	height: 120px;
+	width: 24%;
+}
+
+/*.section p {
+    padding: 1em;
+}*/
+
+
+.tags {
+	font-size: .75em;
+	font-weight: lighter;
+	font-style: italic;
+	height: 22px;
+	line-height: 1em;
+	padding-left: 1em;
+	border-top: 1px solid #222222;
+	
+}
+
+.tags span {
+	margin-right: 1px;
+	display: block;
+	float: left;
+	background-color: #444444;
+	height: 18px;
+	margin: 1px;
+	line-height: 18px;
+	padding: 1px 4px 1px 4px;
+}
+/* Styles for basic forms
+-----------------------------------------------------------*/
+
+
+/*legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}*/
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+textarea.code {
+    background-color: #232323;
+    color: black;
+    margin: 1em;
+    padding: .5em;
+    width: 100%;
+    resize: none;
+    border: 1px solid #2e2e2e;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.txt_placeholder {
+	font-size: 2em;
+	color: silver;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #444444;
+	width: 100%;
+	text-align: center;
+}
+
+div.preview {
+	width: 30%;
+	height: auto;
+	max-width: 300px;
+	max-height: 400px;
+	display: inline-block;
+
+	overflow: hidden;
+	padding: 0px;
+	border:  1px solid #444444;
+}
+
+div.summary {
+	   height: auto;
+	   display: inline-block;
+	   width: 60%;
+}
