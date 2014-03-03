@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web404.Site", "Web404.Site\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web404.Site.Tests", "Web404.Site.Tests\Web404.Site.Tests.csproj", "{6B0C7CC0-8F52-4141-A5E7-443A0C1397CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web404.CMS", "Web404.CMS\Web404.CMS.csproj", "{69A0559A-4DC4-42AD-96C6-939B896A9AAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web404.CMS", "Web404.CMS\Web404.CMS.csproj", "{848B0683-FA5A-4A48-BC27-79AC9F32E6D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{6B0C7CC0-8F52-4141-A5E7-443A0C1397CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B0C7CC0-8F52-4141-A5E7-443A0C1397CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B0C7CC0-8F52-4141-A5E7-443A0C1397CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69A0559A-4DC4-42AD-96C6-939B896A9AAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69A0559A-4DC4-42AD-96C6-939B896A9AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69A0559A-4DC4-42AD-96C6-939B896A9AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69A0559A-4DC4-42AD-96C6-939B896A9AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{848B0683-FA5A-4A48-BC27-79AC9F32E6D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848B0683-FA5A-4A48-BC27-79AC9F32E6D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848B0683-FA5A-4A48-BC27-79AC9F32E6D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848B0683-FA5A-4A48-BC27-79AC9F32E6D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
