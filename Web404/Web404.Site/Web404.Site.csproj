@@ -118,13 +118,18 @@
   <ItemGroup>
     <Content Include="Content\original.css" />
     <Content Include="Content\PostFiles\wallpaper_11_18_2013\preview.png" />
-    <Content Include="Content\site.css" />
+    <Content Include="Content\site.css">
+      <DependentUpon>site.less</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Content\grid.less" />
-    <Content Include="Content\site.css.map" />
+    <Content Include="Content\site.css.map">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
     <Content Include="Content\site.less" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Images\Icons\Contact\email.png" />
+    <Content Include="Images\Icons\Contact\github.png" />
     <Content Include="Images\Icons\Contact\linkedin.png" />
     <Content Include="Images\Icons\Contact\meetup.png" />
     <Content Include="Images\Icons\Contact\stackoverflow.png" />
