@@ -12,6 +12,7 @@ namespace Web404.CMS
 {
     public class Context : DbContext
     {
-        public DbSet<Page> Pages { get; set; } 
+        public DbSet<Page> Pages { get; set; }
+        public DbSet<Tag> Tags { get; set; }
     }
 }

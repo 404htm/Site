@@ -12,6 +12,9 @@ namespace Web404.Site.Controllers
         // GET: /Home/
         public ActionResult Index()
         {
+            var cms = new CMS.DataManager();
+
+            //var pages = cms.GetPages();
             return View();
         }
 	}
