@@ -14,6 +14,8 @@ namespace Web404.CMS
             _cnn = connectionString;
 
         }
+
+
         public List<Page> GetPages()
         {
             using (var db = new Context(_cnn))

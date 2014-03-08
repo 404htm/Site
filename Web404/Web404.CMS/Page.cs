@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,8 @@ namespace Web404.CMS
         public string URLName { get; set; }
         public string Summary { get; set; }
         public string Content { get; set; }
-        public virtual IEnumerable<Tag> Tags { get; set; }
-        public virtual IEnumerable<Script> SummaryScripts { get; set; }
-        public virtual IEnumerable<Script> Scripts { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<Script> SummaryScripts { get; set; }
+        public virtual ICollection<Script> Scripts { get; set; }
     }
 }
