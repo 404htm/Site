@@ -12,7 +12,7 @@ namespace Web404.CMS
         public DataManager(string connectionString)
         {
             _cnn = connectionString;
-
+            
         }
         public List<Page> GetPages()
         {
