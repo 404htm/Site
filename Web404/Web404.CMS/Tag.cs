@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,6 @@ namespace Web404.CMS
         public string Description { get; set; }
         public int? HomePageID { get; set; }
         public virtual Page HomePage {get; set;}
-        public virtual IEnumerable<Page> Pages { get; set; }
+        public virtual ICollection<Page> Pages { get; set; }
     }
 }
