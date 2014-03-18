@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="da8b84a16ab4475c9ffdfe58b822b9ec" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="Web404.CMS.Page" Width="1.5" PointX="5.125" PointY="0.875" />
+        <EntityTypeShape EntityType="Web404.CMS.Script" Width="1.5" PointX="1.375" PointY="2.625" />
+        <EntityTypeShape EntityType="Web404.CMS.Tag" Width="1.5" PointX="10.375" PointY="1.375" />
+        <AssociationConnector Association="Web404.CMS.FK_dbo_Pages_dbo_Tags_Tag_ID" />
+        <AssociationConnector Association="Web404.CMS.FK_dbo_Tags_dbo_Pages_HomePageID" />
+        <AssociationConnector Association="Web404.CMS.PageTags" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

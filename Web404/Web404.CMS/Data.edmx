@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Web404.CMS.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="URLName" Type="nvarchar(max)" />
+          <Property Name="Summary" Type="nvarchar(max)" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Tag_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="PageTags">
+          <Key>
+            <PropertyRef Name="PageID" />
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="PageID" Type="int" Nullable="false" />
+          <Property Name="TagID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Scripts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Content" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="HomePageID" Type="int" />
+        </EntityType>
+        <Association Name="FK_dbo_Pages_dbo_Tags_Tag_ID">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="0..1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="Tag_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PageTags_dbo_Pages_PageID">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PageTags" Type="Self.PageTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PageTags">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PageTags_dbo_Tags_TagID">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PageTags" Type="Self.PageTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PageTags">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Tags_dbo_Pages_HomePageID">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
+          <End Role="Tags" Type="Self.Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tags">
+              <PropertyRef Name="HomePageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Web404CMSStoreContainer">
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PageTags" EntityType="Self.PageTags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scripts" EntityType="Self.Scripts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Pages_dbo_Tags_Tag_ID" Association="Self.FK_dbo_Pages_dbo_Tags_Tag_ID">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PageTags_dbo_Pages_PageID" Association="Self.FK_dbo_PageTags_dbo_Pages_PageID">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="PageTags" EntitySet="PageTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PageTags_dbo_Tags_TagID" Association="Self.FK_dbo_PageTags_dbo_Tags_TagID">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="PageTags" EntitySet="PageTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Tags_dbo_Pages_HomePageID" Association="Self.FK_dbo_Tags_dbo_Pages_HomePageID">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Tags" EntitySet="Tags" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Web404.CMS" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Web404Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pages" EntityType="Web404.CMS.Page" />
+          <EntitySet Name="Scripts" EntityType="Web404.CMS.Script" />
+          <EntitySet Name="Tags" EntityType="Web404.CMS.Tag" />
+          <AssociationSet Name="FK_dbo_Pages_dbo_Tags_Tag_ID" Association="Web404.CMS.FK_dbo_Pages_dbo_Tags_Tag_ID">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Tags_dbo_Pages_HomePageID" Association="Web404.CMS.FK_dbo_Tags_dbo_Pages_HomePageID">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="PageTags" Association="Web404.CMS.PageTags">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="URLName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tag_ID" Type="Int32" />
+          <NavigationProperty Name="Tag" Relationship="Web404.CMS.FK_dbo_Pages_dbo_Tags_Tag_ID" FromRole="Page" ToRole="Tag" />
+          <NavigationProperty Name="Tags" Relationship="Web404.CMS.FK_dbo_Tags_dbo_Pages_HomePageID" FromRole="Page" ToRole="Tag" />
+          <NavigationProperty Name="Tags1" Relationship="Web404.CMS.PageTags" FromRole="Page" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Script">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HomePageID" Type="Int32" />
+          <NavigationProperty Name="Pages" Relationship="Web404.CMS.FK_dbo_Pages_dbo_Tags_Tag_ID" FromRole="Tag" ToRole="Page" />
+          <NavigationProperty Name="Page" Relationship="Web404.CMS.FK_dbo_Tags_dbo_Pages_HomePageID" FromRole="Tag" ToRole="Page" />
+          <NavigationProperty Name="Pages1" Relationship="Web404.CMS.PageTags" FromRole="Tag" ToRole="Page" />
+        </EntityType>
+        <Association Name="FK_dbo_Pages_dbo_Tags_Tag_ID">
+          <End Type="Web404.CMS.Tag" Role="Tag" Multiplicity="0..1" />
+          <End Type="Web404.CMS.Page" Role="Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="Tag_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Tags_dbo_Pages_HomePageID">
+          <End Type="Web404.CMS.Page" Role="Page" Multiplicity="0..1" />
+          <End Type="Web404.CMS.Tag" Role="Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tag">
+              <PropertyRef Name="HomePageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PageTags">
+          <End Type="Web404.CMS.Page" Role="Page" Multiplicity="*" />
+          <End Type="Web404.CMS.Tag" Role="Tag" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Web404CMSStoreContainer" CdmEntityContainer="Web404Entities">
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="Web404.CMS.Page">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Tag_ID" ColumnName="Tag_ID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="URLName" ColumnName="URLName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scripts">
+            <EntityTypeMapping TypeName="Web404.CMS.Script">
+              <MappingFragment StoreEntitySet="Scripts">
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="Web404.CMS.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="HomePageID" ColumnName="HomePageID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PageTags" TypeName="Web404.CMS.PageTags" StoreEntitySet="PageTags">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="ID" ColumnName="TagID" />
+            </EndProperty>
+            <EndProperty Name="Page">
+              <ScalarProperty Name="ID" ColumnName="PageID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

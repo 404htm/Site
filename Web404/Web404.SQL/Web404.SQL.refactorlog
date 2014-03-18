@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="aa010f05-17cc-42cb-a9c1-e277b0524559" ChangeDateTime="03/18/2014 03:26:59">
+    <Property Name="ElementName" Value="[dbo].[VisitorLog].[Referrer]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VisitorLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Referer" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2160fc04-b781-449f-972e-5e799c75ecec" ChangeDateTime="03/18/2014 03:32:18">
+    <Property Name="ElementName" Value="[dbo].[VisitorLog].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VisitorLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d0b60a37-a6c3-4752-bdb9-c34616bf407b" ChangeDateTime="03/18/2014 03:32:25">
+    <Property Name="ElementName" Value="[dbo].[ErrorLog].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ErrorLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ID" />
+  </Operation>
+</Operations>

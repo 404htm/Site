@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[VisitorLog]
+(
+	[ID] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [URL] VARCHAR(MAX) NULL, 
+    [IP] VARCHAR(50) NULL, 
+    [Referer] VARCHAR(MAX) NULL, 
+    [UserAgent] VARCHAR(MAX) NULL
+)
