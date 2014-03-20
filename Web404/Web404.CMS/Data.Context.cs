@@ -13,11 +13,12 @@ namespace Web404.CMS
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Web404Entities : DbContext
+    internal partial class Context : DbContext
     {
-        public Web404Entities()
-            : base("name=Web404Entities")
+        public Context()
+            : base("name=Context")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -25,8 +26,11 @@ namespace Web404.CMS
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<Script> Scripts { get; set; }
+        public virtual DbSet<Style> Styles { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<VisitorLog> VisitorLogs { get; set; }
     }
 }

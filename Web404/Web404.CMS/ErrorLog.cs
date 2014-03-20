@@ -12,20 +12,13 @@ namespace Web404.CMS
     using System;
     using System.Collections.Generic;
     
-    public partial class Script
+    public partial class ErrorLog
     {
-        public Script()
-        {
-            this.Pages = new HashSet<Page>();
-        }
-    
         public int ID { get; set; }
-        public string Name { get; set; }
-        public int Version { get; set; }
-        public System.DateTime Date { get; set; }
-        public string Content { get; set; }
-        public string Notes { get; set; }
-    
-        public virtual ICollection<Page> Pages { get; set; }
+        public string URL { get; set; }
+        public string Message { get; set; }
+        public string StackTrace { get; set; }
+        public string InnerException { get; set; }
+        public string Description { get; set; }
     }
 }

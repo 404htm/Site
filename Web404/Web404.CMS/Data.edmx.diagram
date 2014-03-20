@@ -4,13 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="da8b84a16ab4475c9ffdfe58b822b9ec" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="Web404.CMS.Page" Width="1.5" PointX="5.125" PointY="0.875" />
-        <EntityTypeShape EntityType="Web404.CMS.Script" Width="1.5" PointX="1.375" PointY="2.625" />
-        <EntityTypeShape EntityType="Web404.CMS.Tag" Width="1.5" PointX="10.375" PointY="1.375" />
-        <AssociationConnector Association="Web404.CMS.FK_dbo_Pages_dbo_Tags_Tag_ID" />
-        <AssociationConnector Association="Web404.CMS.FK_dbo_Tags_dbo_Pages_HomePageID" />
-        <AssociationConnector Association="Web404.CMS.PageTags" />
+      <Diagram DiagramId="190dbd28be92431dac1bd2842e8983b5" Name="Diagram1">
+        <EntityTypeShape EntityType="Data.ErrorLog" Width="1.5" PointX="4.875" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Page" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Script" Width="1.5" PointX="1.125" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Style" Width="1.5" PointX="1.125" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Tag" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.VisitorLog" Width="1.5" PointX="4.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="Data.PageScripts" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.PageStyles" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.PageTags" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

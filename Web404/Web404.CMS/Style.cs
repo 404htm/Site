@@ -12,19 +12,17 @@ namespace Web404.CMS
     using System;
     using System.Collections.Generic;
     
-    public partial class Script
+    public partial class Style
     {
-        public Script()
+        public Style()
         {
             this.Pages = new HashSet<Page>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public int Version { get; set; }
-        public System.DateTime Date { get; set; }
+        public string Description { get; set; }
         public string Content { get; set; }
-        public string Notes { get; set; }
     
         public virtual ICollection<Page> Pages { get; set; }
     }

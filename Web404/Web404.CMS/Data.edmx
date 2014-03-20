@@ -4,18 +4,46 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Web404.CMS.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URL" Type="varchar(max)" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="StackTrace" Type="varchar(max)" />
+          <Property Name="InnerException" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="Pages">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar(max)" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="URLName" Type="nvarchar(max)" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="URLName" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Summary" Type="nvarchar(max)" />
           <Property Name="Content" Type="nvarchar(max)" />
-          <Property Name="Tag_ID" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PageScripts">
+          <Key>
+            <PropertyRef Name="PageID" />
+            <PropertyRef Name="ScriptID" />
+          </Key>
+          <Property Name="PageID" Type="int" Nullable="false" />
+          <Property Name="ScriptID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PageStyles">
+          <Key>
+            <PropertyRef Name="PageID" />
+            <PropertyRef Name="StyleID" />
+          </Key>
+          <Property Name="PageID" Type="int" Nullable="false" />
+          <Property Name="StyleID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PageTags">
           <Key>
@@ -30,6 +58,17 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Version" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Content" Type="varchar(max)" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Styles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Content" Type="nvarchar(max)" />
@@ -39,26 +78,69 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="HomePageID" Type="int" />
         </EntityType>
-        <Association Name="FK_dbo_Pages_dbo_Tags_Tag_ID">
-          <End Role="Tags" Type="Self.Tags" Multiplicity="0..1" />
-          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+        <EntityType Name="VisitorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URL" Type="varchar(max)" />
+          <Property Name="IP" Type="varchar" MaxLength="50" />
+          <Property Name="Referer" Type="varchar(max)" />
+          <Property Name="UserAgent" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_PageScripts_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="PageScripts" Type="Self.PageScripts" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tags">
+            <Principal Role="Pages">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Pages">
-              <PropertyRef Name="Tag_ID" />
+            <Dependent Role="PageScripts">
+              <PropertyRef Name="PageID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_PageTags_dbo_Pages_PageID">
-          <End Role="Pages" Type="Self.Pages" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK_PageScripts_Scripts">
+          <End Role="Scripts" Type="Self.Scripts" Multiplicity="1" />
+          <End Role="PageScripts" Type="Self.PageScripts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scripts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PageScripts">
+              <PropertyRef Name="ScriptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PageStyles_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="PageStyles" Type="Self.PageStyles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PageStyles">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PageStyles_Styles">
+          <End Role="Styles" Type="Self.Styles" Multiplicity="1" />
+          <End Role="PageStyles" Type="Self.PageStyles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Styles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PageStyles">
+              <PropertyRef Name="StyleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PageTags_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
           <End Role="PageTags" Type="Self.PageTags" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pages">
@@ -69,10 +151,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_PageTags_dbo_Tags_TagID">
-          <End Role="Tags" Type="Self.Tags" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK_PageTags_Tags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
           <End Role="PageTags" Type="Self.PageTags" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tags">
@@ -83,170 +163,242 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Tags_dbo_Pages_HomePageID">
-          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
-          <End Role="Tags" Type="Self.Tags" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pages">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Tags">
-              <PropertyRef Name="HomePageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="Web404CMSStoreContainer">
+        <EntityContainer Name="DataStoreContainer">
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PageScripts" EntityType="Self.PageScripts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PageStyles" EntityType="Self.PageStyles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PageTags" EntityType="Self.PageTags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Scripts" EntityType="Self.Scripts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Styles" EntityType="Self.Styles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_dbo_Pages_dbo_Tags_Tag_ID" Association="Self.FK_dbo_Pages_dbo_Tags_Tag_ID">
-            <End Role="Tags" EntitySet="Tags" />
+          <EntitySet Name="VisitorLog" EntityType="Self.VisitorLog" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PageScripts_Pages" Association="Self.FK_PageScripts_Pages">
             <End Role="Pages" EntitySet="Pages" />
+            <End Role="PageScripts" EntitySet="PageScripts" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_PageTags_dbo_Pages_PageID" Association="Self.FK_dbo_PageTags_dbo_Pages_PageID">
+          <AssociationSet Name="FK_PageScripts_Scripts" Association="Self.FK_PageScripts_Scripts">
+            <End Role="Scripts" EntitySet="Scripts" />
+            <End Role="PageScripts" EntitySet="PageScripts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PageStyles_Pages" Association="Self.FK_PageStyles_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="PageStyles" EntitySet="PageStyles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PageStyles_Styles" Association="Self.FK_PageStyles_Styles">
+            <End Role="Styles" EntitySet="Styles" />
+            <End Role="PageStyles" EntitySet="PageStyles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PageTags_Pages" Association="Self.FK_PageTags_Pages">
             <End Role="Pages" EntitySet="Pages" />
             <End Role="PageTags" EntitySet="PageTags" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_PageTags_dbo_Tags_TagID" Association="Self.FK_dbo_PageTags_dbo_Tags_TagID">
+          <AssociationSet Name="FK_PageTags_Tags" Association="Self.FK_PageTags_Tags">
             <End Role="Tags" EntitySet="Tags" />
             <End Role="PageTags" EntitySet="PageTags" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Tags_dbo_Pages_HomePageID" Association="Self.FK_dbo_Tags_dbo_Pages_HomePageID">
-            <End Role="Pages" EntitySet="Pages" />
-            <End Role="Tags" EntitySet="Tags" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Web404.CMS" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="Web404Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Pages" EntityType="Web404.CMS.Page" />
-          <EntitySet Name="Scripts" EntityType="Web404.CMS.Script" />
-          <EntitySet Name="Tags" EntityType="Web404.CMS.Tag" />
-          <AssociationSet Name="FK_dbo_Pages_dbo_Tags_Tag_ID" Association="Web404.CMS.FK_dbo_Pages_dbo_Tags_Tag_ID">
-            <End Role="Tag" EntitySet="Tags" />
-            <End Role="Page" EntitySet="Pages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Tags_dbo_Pages_HomePageID" Association="Web404.CMS.FK_dbo_Tags_dbo_Pages_HomePageID">
-            <End Role="Page" EntitySet="Pages" />
-            <End Role="Tag" EntitySet="Tags" />
-          </AssociationSet>
-          <AssociationSet Name="PageTags" Association="Web404.CMS.PageTags">
-            <End Role="Page" EntitySet="Pages" />
-            <End Role="Tag" EntitySet="Tags" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Page">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="URLName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="URLName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Tag_ID" Type="Int32" />
-          <NavigationProperty Name="Tag" Relationship="Web404.CMS.FK_dbo_Pages_dbo_Tags_Tag_ID" FromRole="Page" ToRole="Tag" />
-          <NavigationProperty Name="Tags" Relationship="Web404.CMS.FK_dbo_Tags_dbo_Pages_HomePageID" FromRole="Page" ToRole="Tag" />
-          <NavigationProperty Name="Tags1" Relationship="Web404.CMS.PageTags" FromRole="Page" ToRole="Tag" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Scripts" Relationship="Self.PageScripts" FromRole="Pages" ToRole="Scripts" />
+          <NavigationProperty Name="Styles" Relationship="Self.PageStyles" FromRole="Pages" ToRole="Styles" />
+          <NavigationProperty Name="Tags" Relationship="Self.PageTags" FromRole="Pages" ToRole="Tags" />
         </EntityType>
         <EntityType Name="Script">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Version" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pages" Relationship="Self.PageScripts" FromRole="Scripts" ToRole="Pages" />
         </EntityType>
-        <EntityType Name="Tag">
+        <EntityType Name="Style">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="HomePageID" Type="Int32" />
-          <NavigationProperty Name="Pages" Relationship="Web404.CMS.FK_dbo_Pages_dbo_Tags_Tag_ID" FromRole="Tag" ToRole="Page" />
-          <NavigationProperty Name="Page" Relationship="Web404.CMS.FK_dbo_Tags_dbo_Pages_HomePageID" FromRole="Tag" ToRole="Page" />
-          <NavigationProperty Name="Pages1" Relationship="Web404.CMS.PageTags" FromRole="Tag" ToRole="Page" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pages" Relationship="Self.PageStyles" FromRole="Styles" ToRole="Pages" />
         </EntityType>
-        <Association Name="FK_dbo_Pages_dbo_Tags_Tag_ID">
-          <End Type="Web404.CMS.Tag" Role="Tag" Multiplicity="0..1" />
-          <End Type="Web404.CMS.Page" Role="Page" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tag">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Page">
-              <PropertyRef Name="Tag_ID" />
-            </Dependent>
-          </ReferentialConstraint>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pages" Relationship="Self.PageTags" FromRole="Tags" ToRole="Pages" />
+        </EntityType>
+        <EntityType Name="VisitorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Referer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="PageScripts">
+          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
+          <End Role="Scripts" Type="Self.Script" Multiplicity="*" />
         </Association>
-        <Association Name="FK_dbo_Tags_dbo_Pages_HomePageID">
-          <End Type="Web404.CMS.Page" Role="Page" Multiplicity="0..1" />
-          <End Type="Web404.CMS.Tag" Role="Tag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Page">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Tag">
-              <PropertyRef Name="HomePageID" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="PageStyles">
+          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
+          <End Role="Styles" Type="Self.Style" Multiplicity="*" />
         </Association>
         <Association Name="PageTags">
-          <End Type="Web404.CMS.Page" Role="Page" Multiplicity="*" />
-          <End Type="Web404.CMS.Tag" Role="Tag" Multiplicity="*" />
+          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
+          <End Role="Tags" Type="Self.Tag" Multiplicity="*" />
         </Association>
+        <EntityContainer Name="Context" annotation:LazyLoadingEnabled="false" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
+          <EntitySet Name="Pages" EntityType="Self.Page" />
+          <EntitySet Name="Scripts" EntityType="Self.Script" />
+          <EntitySet Name="Styles" EntityType="Self.Style" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <EntitySet Name="VisitorLogs" EntityType="Self.VisitorLog" />
+          <AssociationSet Name="PageScripts" Association="Self.PageScripts">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Scripts" EntitySet="Scripts" />
+          </AssociationSet>
+          <AssociationSet Name="PageStyles" Association="Self.PageStyles">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Styles" EntitySet="Styles" />
+          </AssociationSet>
+          <AssociationSet Name="PageTags" Association="Self.PageTags">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Tags" EntitySet="Tags" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Web404CMSStoreContainer" CdmEntityContainer="Web404Entities">
+        <EntityContainerMapping StorageEntityContainer="DataStoreContainer" CdmEntityContainer="Context">
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="Data.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="InnerException" ColumnName="InnerException" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Pages">
-            <EntityTypeMapping TypeName="Web404.CMS.Page">
+            <EntityTypeMapping TypeName="Data.Page">
               <MappingFragment StoreEntitySet="Pages">
-                <ScalarProperty Name="Tag_ID" ColumnName="Tag_ID" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="URLName" ColumnName="URLName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URLName" ColumnName="URLName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Scripts">
-            <EntityTypeMapping TypeName="Web404.CMS.Script">
+            <EntityTypeMapping TypeName="Data.Script">
               <MappingFragment StoreEntitySet="Scripts">
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Styles">
+            <EntityTypeMapping TypeName="Data.Style">
+              <MappingFragment StoreEntitySet="Styles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tags">
-            <EntityTypeMapping TypeName="Web404.CMS.Tag">
+            <EntityTypeMapping TypeName="Data.Tag">
               <MappingFragment StoreEntitySet="Tags">
-                <ScalarProperty Name="HomePageID" ColumnName="HomePageID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="PageTags" TypeName="Web404.CMS.PageTags" StoreEntitySet="PageTags">
-            <EndProperty Name="Tag">
-              <ScalarProperty Name="ID" ColumnName="TagID" />
-            </EndProperty>
-            <EndProperty Name="Page">
+          <EntitySetMapping Name="VisitorLogs">
+            <EntityTypeMapping TypeName="Data.VisitorLog">
+              <MappingFragment StoreEntitySet="VisitorLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Referer" ColumnName="Referer" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PageScripts" TypeName="Data.PageScripts" StoreEntitySet="PageScripts">
+            <EndProperty Name="Pages">
               <ScalarProperty Name="ID" ColumnName="PageID" />
+            </EndProperty>
+            <EndProperty Name="Scripts">
+              <ScalarProperty Name="ID" ColumnName="ScriptID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PageStyles" TypeName="Data.PageStyles" StoreEntitySet="PageStyles">
+            <EndProperty Name="Pages">
+              <ScalarProperty Name="ID" ColumnName="PageID" />
+            </EndProperty>
+            <EndProperty Name="Styles">
+              <ScalarProperty Name="ID" ColumnName="StyleID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PageTags" TypeName="Data.PageTags" StoreEntitySet="PageTags">
+            <EndProperty Name="Pages">
+              <ScalarProperty Name="ID" ColumnName="PageID" />
+            </EndProperty>
+            <EndProperty Name="Tags">
+              <ScalarProperty Name="ID" ColumnName="TagID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

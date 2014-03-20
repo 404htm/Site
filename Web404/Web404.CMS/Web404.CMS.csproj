@@ -54,6 +54,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Data.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data.Context_fix.cs" />
     <Compile Include="Data.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -65,6 +66,9 @@
       <DependentUpon>Data.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataManager.cs" />
+    <Compile Include="ErrorLog.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="Page.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
@@ -77,7 +81,13 @@
     <Compile Include="Script.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="Style.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tag.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisitorLog.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
   </ItemGroup>

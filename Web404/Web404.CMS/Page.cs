@@ -16,20 +16,22 @@ namespace Web404.CMS
     {
         public Page()
         {
+            this.Scripts = new HashSet<Script>();
+            this.Styles = new HashSet<Style>();
             this.Tags = new HashSet<Tag>();
-            this.Tags1 = new HashSet<Tag>();
         }
     
         public int ID { get; set; }
-        public string Title { get; set; }
         public System.DateTime Date { get; set; }
+        public string Title { get; set; }
         public string URLName { get; set; }
+        public string Description { get; set; }
         public string Summary { get; set; }
         public string Content { get; set; }
-        public Nullable<int> Tag_ID { get; set; }
+        public bool Active { get; set; }
     
-        public virtual Tag Tag { get; set; }
+        public virtual ICollection<Script> Scripts { get; set; }
+        public virtual ICollection<Style> Styles { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
-        public virtual ICollection<Tag> Tags1 { get; set; }
     }
 }

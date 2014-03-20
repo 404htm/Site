@@ -17,16 +17,12 @@ namespace Web404.CMS
         public Tag()
         {
             this.Pages = new HashSet<Page>();
-            this.Pages1 = new HashSet<Page>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Nullable<int> HomePageID { get; set; }
     
         public virtual ICollection<Page> Pages { get; set; }
-        public virtual Page Page { get; set; }
-        public virtual ICollection<Page> Pages1 { get; set; }
     }
 }
