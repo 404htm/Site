@@ -22,8 +22,8 @@ namespace Web404.CMS
             {
                 return db.Pages.ToList();
             }
-           
-
         }
+
+
     }
 }
