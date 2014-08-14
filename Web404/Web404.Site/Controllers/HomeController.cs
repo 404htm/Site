@@ -20,5 +20,20 @@ namespace Web404.Site.Controllers
             //var pages = cms.GetPages();
             return View();
         }
+
+		public ActionResult About()
+		{
+			return View();
+		}
+
+		public ActionResult Projects()
+		{
+			return View();
+		}
+
+		public ActionResult Tools()
+		{
+			return View();
+		}
 	}
 }

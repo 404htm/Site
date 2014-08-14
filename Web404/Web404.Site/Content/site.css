@@ -154,7 +154,14 @@ nav li a:hover {
 #contact {
   /*background-image: url(../Images/Icons/Home.png);*/
 }
-/*# sourceMappingURL=site.css.map */
+/*#sidebar {
+    float: right;
+    width: 400px;
+    background-color:  #333333;
+    height: 1000px;
+    margin: 1em;
+    padding: 1em;
+}*/
 .section h3 {
   display: block;
   color: white;
