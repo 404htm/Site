@@ -7,7 +7,7 @@
     [Summary]     NVARCHAR (MAX) NULL,
     [Content]     NVARCHAR (MAX) NULL,
     [Active]      BIT            NOT NULL,
-    [SectionID] INT NOT NULL, 
+    [SectionID] INT NULL , 
     CONSTRAINT [PK_Pages_1] PRIMARY KEY CLUSTERED ([ID] ASC), 
     CONSTRAINT [FK_Pages_Section] FOREIGN KEY ([SectionID]) REFERENCES [Sections]([ID])
 );
