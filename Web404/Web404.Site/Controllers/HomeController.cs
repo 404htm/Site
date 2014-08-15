@@ -7,33 +7,42 @@ using System.Configuration;
 
 namespace Web404.Site.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        //
-        // GET: /Home/
-        public ActionResult Index()
+        public ActionResult Index(int start = 0, int take = 10)
         {
-            var cnn = ConfigurationManager.ConnectionStrings["AzureSQL"].ConnectionString;
-            var cms = new CMS.DataManager(cnn);
-
-            var data = cms.GetPages();
-            //var pages = cms.GetPages();
-            return View();
+            var data = CMS.GetPageSummaries("Home", start, take);
+            return View(data);
         }
+
+		public ActionResult Article(string ID)
+		{
+			var data = CMS.GetPage(ID);
+			return View(data);
+		}
+
+		public ActionResult Tag(string ID)
+		{
+			var data = CMS.GetTagArticleSummaries(ID);
+			return View(data);
+		}
 
 		public ActionResult About()
 		{
-			return View();
+			var data = CMS.GetSectionDefaultPage("About");
+			return View(data);
 		}
 
 		public ActionResult Projects()
 		{
-			return View();
+			var data = CMS.GetSectionPages("About");
+			return View(data);
 		}
 
 		public ActionResult Tools()
 		{
-			return View();
+			var data = CMS.GetSectionPages("Tools");
+			return View(data);
 		}
 	}
 }

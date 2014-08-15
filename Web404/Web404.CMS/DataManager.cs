@@ -25,5 +25,35 @@ namespace Web404.CMS
         }
 
 
-    }
+
+		public Page GetArticle(string ID)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Page GetTagArticleSummaries(string ID)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Page GetSectionDefaultPage(string p)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Page GetSectionPages(string p)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object GetPage(string ID)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object GetPageSummaries(string p, int start, int take)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
