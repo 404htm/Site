@@ -32,5 +32,6 @@ namespace Web404.CMS
         public virtual DbSet<Style> Styles { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<VisitorLog> VisitorLogs { get; set; }
+        public virtual DbSet<Section> Sections { get; set; }
     }
 }

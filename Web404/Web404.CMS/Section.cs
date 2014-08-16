@@ -12,19 +12,16 @@ namespace Web404.CMS
     using System;
     using System.Collections.Generic;
     
-    public partial class Tag
+    public partial class Section
     {
-        public Tag()
+        public Section()
         {
             this.Pages = new HashSet<Page>();
         }
     
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> HomePageID { get; set; }
     
         public virtual ICollection<Page> Pages { get; set; }
-        public virtual Page Page { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace Web404.CMS
             this.Scripts = new HashSet<Script>();
             this.Styles = new HashSet<Style>();
             this.Tags = new HashSet<Tag>();
+            this.Tags1 = new HashSet<Tag>();
         }
     
         public int ID { get; set; }
@@ -29,9 +30,12 @@ namespace Web404.CMS
         public string Summary { get; set; }
         public string Content { get; set; }
         public bool Active { get; set; }
+        public Nullable<int> SectionID { get; set; }
     
         public virtual ICollection<Script> Scripts { get; set; }
         public virtual ICollection<Style> Styles { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
+        public virtual Section Section { get; set; }
+        public virtual ICollection<Tag> Tags1 { get; set; }
     }
 }

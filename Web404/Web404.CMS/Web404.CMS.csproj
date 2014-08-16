@@ -84,6 +84,9 @@
     <Compile Include="Script.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="Section.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="Style.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
