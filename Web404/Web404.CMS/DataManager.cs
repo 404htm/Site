@@ -32,20 +32,29 @@ namespace Web404.CMS
         }
 
 
-
-		public Page GetArticle(string ID)
-		{
-			
-		}
-
-		public Page GetTagArticleSummaries(string ID)
+		public List<PageSummary> GetTagArticleSummaries(string tag, int start = 0, int? pageCount = null)
 		{
 			using (var db = new Context(_cnn))
 			{
-				return db.Tags
-				.Single(s => s.Name == ID)
+				var take = pageCount ?? DEFAULT_PAGE_COUNT;
+
+				return db
 				.Pages
-				.Select(p => new )
+				.Where(p => p.Tags.Where(t => t.Name == tag).Any())
+				.Where(p => p.Active)
+				.Skip(() => start)
+				.Take(() => take)
+				.Select(p => new PageSummary
+				{
+					Summary = p.Summary,
+					Date = p.Date,
+					Description = p.Description,
+					ID = p.ID,
+					Tags = p.Tags.ToList(),
+					Section = p.Section.Name,
+					Title = p.Title,
+					URLName = p.URLName
+				})
 				.ToList();
 			}
 		}
@@ -74,13 +83,12 @@ namespace Web404.CMS
 			}
 		}
 
-		public object GetPage(string pageUrl)
+		public Page GetPage(string pageUrl)
 		{
 			using (var db = new Context(_cnn))
 			{
 				return db.Pages
-				.Where(p => p.URLName == pageUrl && p.Active)
-				.ToList();
+				.SingleOrDefault(p => p.URLName == pageUrl && p.Active);
 			}
 		}
 
@@ -89,14 +97,33 @@ namespace Web404.CMS
 			using (var db = new Context(_cnn))
 			{
 				return db.Pages
-				.Where(p => p.ID == PageID && p.Active)
-				.SingleOrDefault();
+				.SingleOrDefault(p => p.ID == PageID && p.Active);
 			}
 		}
 
-		public object GetPageSummaries(string p, int start, int take)
+		public object GetPageSummaries(int start = 0, int? pageCount = null)
 		{
-			throw new NotImplementedException();
+			using (var db = new Context(_cnn))
+			{
+				var take = pageCount ?? DEFAULT_PAGE_COUNT;
+
+				return db.Pages
+				.Where(p => p.Active)
+				.Skip(() => start)
+				.Take(() => take)
+				.Select(p => new PageSummary
+					{
+						Summary = p.Summary,
+						Date = p.Date,
+						Description = p.Description,
+						ID = p.ID,
+						Tags = p.Tags.ToList(),
+						Section = p.Section.Name,
+						Title = p.Title,
+						URLName = p.URLName
+					})
+				.ToList();
+			}
 		}
 	}
 }

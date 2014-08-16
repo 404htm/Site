@@ -9,9 +9,9 @@ namespace Web404.Site.Controllers
 {
     public abstract class BaseController : Controller
     {
-		public CMS.DataManager CMS
+		protected CMS.DataManager CMS
 		{
-			public get {
+			get {
 				var cnn = ConfigurationManager.ConnectionStrings["AzureSQL"].ConnectionString;
 				var cms = new CMS.DataManager(cnn);
 				return cms;
