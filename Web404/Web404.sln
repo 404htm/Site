@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Web404.Azure", "Web404.Azure\Web404.Azure.ccproj", "{E670DBD7-5222-439F-A62C-994DBE8BA0BA}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web404.CMS", "Web404.CMS\Web404.CMS.csproj", "{848B0683-FA5A-4A48-BC27-79AC9F32E6D1}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Web404.SQL", "Web404.SQL\Web404.SQL.sqlproj", "{C08BAC00-2243-465C-B6D5-9A2DF850BA79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{62410343-C229-488C-B840-6FFE45E37EF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web404.CMS.Tests", "Web404.CMS.Tests\Web404.CMS.Tests.csproj", "{4D9ABDA6-2BC4-4CC7-BF90-15D33C2D9437}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,8 +45,16 @@ Global
 		{C08BAC00-2243-465C-B6D5-9A2DF850BA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C08BAC00-2243-465C-B6D5-9A2DF850BA79}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C08BAC00-2243-465C-B6D5-9A2DF850BA79}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4D9ABDA6-2BC4-4CC7-BF90-15D33C2D9437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D9ABDA6-2BC4-4CC7-BF90-15D33C2D9437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D9ABDA6-2BC4-4CC7-BF90-15D33C2D9437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D9ABDA6-2BC4-4CC7-BF90-15D33C2D9437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6B0C7CC0-8F52-4141-A5E7-443A0C1397CA} = {62410343-C229-488C-B840-6FFE45E37EF2}
+		{4D9ABDA6-2BC4-4CC7-BF90-15D33C2D9437} = {62410343-C229-488C-B840-6FFE45E37EF2}
 	EndGlobalSection
 EndGlobal
