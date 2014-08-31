@@ -126,17 +126,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\original.css" />
     <Content Include="Content\PostFiles\wallpaper_11_18_2013\preview.png" />
     <Content Include="Content\site.css">
       <DependentUpon>site.less</DependentUpon>
     </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\grid.less" />
     <Content Include="Content\site.css.map">
       <DependentUpon>site.css</DependentUpon>
     </Content>
     <Content Include="Content\site.less" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Images\Icons\Contact\email.png" />
     <Content Include="Images\Icons\Contact\github.png" />
@@ -145,6 +150,7 @@
     <Content Include="Images\Icons\Home.png" />
     <Content Include="Images\pattern10.jpg" />
     <Content Include="LICENSE.txt" />
+    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\d3.v3.js" />
     <Content Include="Scripts\d3.v3.min.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
@@ -173,6 +179,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Tools.cshtml" />
     <Content Include="Views\Home\Projects.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

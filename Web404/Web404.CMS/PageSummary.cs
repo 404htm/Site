@@ -17,5 +17,7 @@ namespace Web404.CMS
 
 		public List<Tag> Tags { get; set; }
 		public string Section { get; set; }
+
+		public bool IsComplete { get; set; }
 	}
 }

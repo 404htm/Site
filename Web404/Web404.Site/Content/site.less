@@ -1,11 +1,4 @@
 ﻿@import 'grid.less';
-
-@columns: 12;
-@column-width: 60;
-@gutter-width: 20;
-@total-width: 100%; // Switch from pixels to percentages
-@square-size: 20; 
-
 @c-font-main: white;
 @c-font-article: silver;
 @c-font-highlight: #3e85fb;
@@ -16,7 +9,7 @@
 @c-special-bg: rgba(50,50,50,.5);
 @c-bright-border:  silver;
 
-body {
+html {
     font-size: 14pt;
     font-family: 'Sintony', sans-serif;
     color: @c-font-main;
@@ -103,10 +96,7 @@ h1 {
 	.transparent;
 	font-size: 12pt;
 	font-weight: normal;
-	
-	margin-bottom: 0px;
-	margin-top: 2em !important;
-	.column(12);
+
 }
 
 #main {
@@ -204,6 +194,10 @@ nav li a:hover {
 	//padding: 0 5px 0 5px;
 }
 
+.footer{
+	.transparent;
+	.section;
+}
 
 .footer-top{
 	display: block;
@@ -428,10 +422,10 @@ a.contact-github {
 a.contact-email:hover, a.contact-so:hover, a.contact-li:hover, a.contact:hover, a.contact-github:hover{
 		 color: @c-font-highlight;
 		 .transition;
-	}
+}
 
 #email{
-	 	color : white;
+	color : white;
 	text-decoration: none;
 	.transition;
 }

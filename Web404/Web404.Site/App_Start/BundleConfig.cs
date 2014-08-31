@@ -12,13 +12,16 @@ namespace Web404.Site.App_Start
 				.Include(
 					"~/Scripts/jquery-{version}.js",
 					"~/Scripts/d3.v3.js",
-					"~/Scripts/site.js"
+					"~/Scripts/site.js",
+					"~/Scripts/bootstrap.js"
 				));
 
             bundles.Add(
 				new StyleBundle("~/Content/Styles")
 					//.Include("~/Content/grid.less")
+					.Include("~/Content/bootstrap.css")
 					.Include("~/Content/site.css")
+					
 				);
 
 		}

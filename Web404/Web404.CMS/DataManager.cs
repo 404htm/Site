@@ -101,19 +101,21 @@ namespace Web404.CMS
 			}
 		}
 
-		public object GetPageSummaries(int start = 0, int? pageCount = null)
+		public List<PageSummary> GetPageSummaries(int start = 0, int? pageCount = null)
 		{
 			using (var db = new Context(_cnn))
 			{
 				var take = pageCount ?? DEFAULT_PAGE_COUNT;
 
 				return db.Pages
+				.OrderByDescending(p => p.Date)
 				.Where(p => p.Active)
 				.Skip(() => start)
 				.Take(() => take)
 				.Select(p => new PageSummary
 					{
-						Summary = p.Summary,
+						Summary = p.Summary??p.Content,
+						IsComplete = p.Summary == null,
 						Date = p.Date,
 						Description = p.Description,
 						ID = p.ID,
