@@ -84,6 +84,6 @@
     <None Include="BaseData\Tags.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web404.SQL.publish.xml" />
+    <None Include="Azure.SQL.publish.xml" />
   </ItemGroup>
 </Project>
