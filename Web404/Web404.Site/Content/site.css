@@ -11,7 +11,7 @@ body {
   background-color: transparent;
 }
 header {
-  margin-bottom: 1em;
+  margin: 15px;
   border-bottom: 1px solid #ffffff;
 }
 header a {
@@ -31,7 +31,7 @@ header a:hover {
   transition: color .5s;
 }
 summary {
-  box-shadow: 0px 0px 20px #151111 !important;
+  box-shadow: 0 0 20px #151111 !important;
   border: none !important;
 }
 .panel,
