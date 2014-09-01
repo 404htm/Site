@@ -1,4 +1,4 @@
-﻿@import 'grid.less';
+﻿
 @c-font-main: white;
 @c-font-article: silver;
 @c-font-highlight: #3e85fb;
@@ -8,6 +8,8 @@
 @c-article-bg: #444444;
 @c-special-bg: rgba(50,50,50,.5);
 @c-bright-border:  silver;
+
+@margin-default: 1em;
 
 html {
     font-size: 14pt;
@@ -19,9 +21,12 @@ html {
     background-attachment: fixed;
 }
 
+body {
+	background-color: transparent;
+}
+
 header {
-	.column(12);
-	margin-bottom: 2*@square-size px;
+	margin-bottom: @margin-default;
 	border-bottom: 1px solid @c-font-main;
 
 	a {
@@ -38,10 +43,26 @@ header {
 		}
 }
 
-aside{
-	.transparent;
-	.column(3);
-	margin-top: 1em;
+summary{
+	box-shadow: 0px 0px 20px #151111 !important;
+	border: none !important;
+}
+
+.panel, .panel div{
+	border-radius: 0;
+	background-color: @c-article-bg;
+	color: @c-font-article;
+	
+}
+
+.panel .panel-heading
+{
+	background-color: @c-article-header;
+	padding: 6px 8px; 
+	color: @c-font-main;
+	border: none;
+
+}
 
 	.header{
 		display: block;
@@ -59,7 +80,6 @@ aside{
 		padding: 10px;
 
 	}
-}	
 
 .transition{
 	-moz-transition: color .5s;
@@ -77,6 +97,11 @@ h1 {
     margin: 0;
 }
 
+h3 {
+	font-size: 1em;
+	margin: 0;
+	display: inline;
+}
 
 .transparent{
    background-color: @c-special-bg;
@@ -100,7 +125,6 @@ h1 {
 }
 
 #main {
-	  .column(9);
 }
 
 
@@ -355,9 +379,9 @@ g.tag text{
 	  .fill-transition;
 }
 
-g.tag:hover text{
+g.tag:hover text, g.tag:hover a{
 	  fill: white;
-	  
+	text-decoration: none;
 	  .fill-transition;
 	  
 }

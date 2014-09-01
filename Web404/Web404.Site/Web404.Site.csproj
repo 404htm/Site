@@ -132,16 +132,16 @@
     <Content Include="Content\site.css">
       <DependentUpon>site.less</DependentUpon>
     </Content>
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\grid.less" />
     <Content Include="Content\site.css.map">
       <DependentUpon>site.css</DependentUpon>
     </Content>
     <Content Include="Content\site.less" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Images\Icons\Contact\email.png" />
     <Content Include="Images\Icons\Contact\github.png" />
@@ -161,7 +161,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Code\ViewBase.cs" />
+    <Compile Include="Code\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -170,7 +171,9 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -179,8 +182,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Tools.cshtml" />
     <Content Include="Views\Home\Projects.cshtml" />
-    <Content Include="Views\Shared\_Layout2.cshtml" />
-    <Content Include="Views\Home\Index2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

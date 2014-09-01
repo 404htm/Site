@@ -12,7 +12,7 @@ namespace Web404.Site.Controllers
         public ActionResult Index(int start = 0, int take = 10)
         {
             var data = CMS.GetPageSummaries();
-            return View("Index2", data);
+            return View(data);
         }
 
 		public ActionResult Article(string ID)
