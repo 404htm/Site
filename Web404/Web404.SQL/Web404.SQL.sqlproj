@@ -83,4 +83,7 @@
     <PostDeploy Include="BaseData\Sections.sql" />
     <None Include="BaseData\Tags.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Web404.SQL.publish.xml" />
+  </ItemGroup>
 </Project>
