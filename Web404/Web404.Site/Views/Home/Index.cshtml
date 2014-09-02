@@ -8,33 +8,8 @@
 
 @foreach (var summary in Model)
 {
-	<summary class="panel panel-default">
-
-
-		<div class="panel-heading">
-			@summary.Date.ToShortDateString() -
-			<h3>@summary.Title</h3><span class="ui-icon ui-icon-newwin"></span>
-			<span class="right"><span class="glyphicon glyphicon-collapse-down"></span></span>
-		</div>
-
-		<div class="panel-body">
-			@Html.Raw(summary.Summary)
-
-			@if (!summary.IsComplete)
-			{
-				<text>...</text>
-			}
-		</div>
-
-		<div class="tags panel-footer">
-			@foreach (var tag in summary.Tags)
-			{
-				<span>@tag.Name</span>
-			}
-		</div>
-
-	</summary>
-
+	Html.RenderPartial("~/Views/Article/Summary.cshtml",summary);
+	//Response.Flush();
 }
 
 

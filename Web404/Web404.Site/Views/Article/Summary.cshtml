@@ -1,0 +1,28 @@
+﻿@model PageSummary
+
+<summary class="panel panel-default">
+
+
+	<div class="panel-heading">
+		@Model.Date.ToShortDateString() -
+		<h3>@Model.Title</h3><span class="ui-icon ui-icon-newwin"></span>
+		<span class="right"><span class="glyphicon glyphicon-collapse-down"></span></span>
+	</div>
+
+	<div class="panel-body">
+		@Html.Raw(Model.Summary)
+
+		@if (!Model.IsComplete)
+		{
+			<text>...</text>
+		}
+	</div>
+
+	<div class="tags panel-footer">
+		@foreach (var tag in Model.Tags)
+		{
+			<span>@tag.Name</span>
+		}
+	</div>
+
+</summary>
