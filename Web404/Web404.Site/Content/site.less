@@ -29,18 +29,18 @@ header {
 	margin: @margin-default;
 	border-bottom: 1px solid @c-font-main;
 
-	a {
-		text-decoration: none;
-		color: @c-font-main;
-		.transition
-	}
+a {
+text-decoration: none;
+color: @c-font-main;
+.transition
+}
 
-		a:hover {
-			text-decoration: none;
-			color: @c-font-highlight;
-			.transition
+a:hover {
+	text-decoration: none;
+	color: @c-font-highlight;
+	.transition
 			
-		}
+}
 }
 
 summary{
@@ -64,22 +64,22 @@ summary{
 
 }
 
-	.header{
-		display: block;
-		margin: 0;
+.header{
+	display: block;
+	margin: 0;
     
-		background-color: @c-special-header;
-		width: auto;
-		padding: 0 5px 0 5px;
+	background-color: @c-special-header;
+	width: auto;
+	padding: 0 5px 0 5px;
 	
-		height: 30px;
-		line-height: 30px;
-	}
+	height: 30px;
+	line-height: 30px;
+}
 
-	.content{
-		padding: 10px;
+.content{
+	padding: 10px;
 
-	}
+}
 
 .transition{
 	-moz-transition: color .5s;
@@ -107,6 +107,7 @@ h3 {
    background-color: @c-special-bg;
    color: silver;
    box-shadow: 0px 0px 20px @c-special-header;
+   border: none;
 }
 
 
@@ -455,3 +456,26 @@ a.contact-email:hover, a.contact-so:hover, a.contact-li:hover, a.contact:hover, 
 }
 
 #email:hover{   color: @c-font-highlight; .transition; }
+
+#RightColumn{
+	padding: 0;
+}
+
+
+
+aside.panel, .panel div{
+	background-color: transparent;
+}
+
+aside, aside.panel { 
+	.transparent;
+	background-color: @c-special-bg;
+	//margin-top: @margin-default;
+	//padding: 0;
+}
+
+
+aside .panel-heading
+{
+	background-color: @c-special-header !important;
+}

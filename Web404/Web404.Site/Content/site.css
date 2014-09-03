@@ -83,11 +83,13 @@ h3 {
   background-color: rgba(50, 50, 50, 0.5);
   color: silver;
   box-shadow: 0px 0px 20px #101010;
+  border: none;
 }
 .section.footer {
   background-color: rgba(50, 50, 50, 0.5);
   color: silver;
   box-shadow: 0px 0px 20px #101010;
+  border: none;
   font-size: 12pt;
   font-weight: normal;
 }
@@ -159,6 +161,7 @@ nav li a:hover {
 .footer {
   background-color: rgba(50, 50, 50, 0.5);
   box-shadow: 0px 0px 20px #101010;
+  border: none;
   width: 100%;
   color: silver;
   margin-top: 1em;
@@ -419,5 +422,22 @@ a.contact-github:hover {
   -o-transition: color .5s;
   -webkit-transition: color .5s;
   transition: color .5s;
+}
+#RightColumn {
+  padding: 0;
+}
+aside.panel,
+.panel div {
+  background-color: transparent;
+}
+aside,
+aside.panel {
+  color: silver;
+  box-shadow: 0px 0px 20px #101010;
+  border: none;
+  background-color: rgba(50, 50, 50, 0.5);
+}
+aside .panel-heading {
+  background-color: #101010 !important;
 }
 /*# sourceMappingURL=site.css.map */
