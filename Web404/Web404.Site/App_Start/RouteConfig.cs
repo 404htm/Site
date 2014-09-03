@@ -13,11 +13,19 @@ namespace Web404.Site
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			routes.MapRoute(
+				name: "Tags",
+				url: "{Tags}/{id}",
+				defaults: new { controller = "Home", action = "Tags" }
+			);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
         }
     }
 }

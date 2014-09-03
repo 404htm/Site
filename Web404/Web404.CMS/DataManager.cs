@@ -42,6 +42,7 @@ namespace Web404.CMS
 				.Pages
 				.Where(p => p.Tags.Where(t => t.Name == tag).Any())
 				.Where(p => p.Active)
+				.OrderByDescending(p => p.Date)
 				.Skip(() => start)
 				.Take(() => take)
 				.Select(p => new PageSummary

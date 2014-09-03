@@ -1,0 +1,14 @@
+﻿@{
+	@model List<Web404.CMS.PageSummary>
+	DisplayTitle = "Tags";
+	PageTitle = "404Htm - Web Development, C#, Tangents";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	FullScreen = false;
+}
+
+@foreach (var summary in Model)
+{
+	Html.RenderPartial("~/Views/Article/Summary.cshtml", summary);
+	//Response.Flush();
+}
+

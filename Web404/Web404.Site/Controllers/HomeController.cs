@@ -21,7 +21,7 @@ namespace Web404.Site.Controllers
 			return View(data);
 		}
 
-		public ActionResult Tag(string ID)
+		public ActionResult Tags(string ID)
 		{
 			var data = CMS.GetTagArticleSummaries(ID);
 			return View(data);
