@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="190dbd28be92431dac1bd2842e8983b5" Name="Diagram1" ZoomLevel="55">
+      <Diagram DiagramId="190dbd28be92431dac1bd2842e8983b5" Name="Diagram1" ZoomLevel="29">
         <EntityTypeShape EntityType="Data.ErrorLog" Width="1.5" PointX="4.875" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Data.Page" Width="1.5" PointX="7.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="Data.Script" Width="1.5" PointX="1.125" PointY="1.375" IsExpanded="true" />
@@ -14,7 +14,7 @@
         <AssociationConnector Association="Data.PageScripts" ManuallyRouted="false" />
         <AssociationConnector Association="Data.PageStyles" ManuallyRouted="false" />
         <AssociationConnector Association="Data.PageTags" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Data.Section" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="Data.Section" Width="1.5" PointX="8" PointY="6.75" />
         <AssociationConnector Association="Data.FK_Pages_Section" />
         <AssociationConnector Association="Data.FK_Tags_ToTable" />
       </Diagram>

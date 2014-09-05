@@ -128,6 +128,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\original.css" />
+    <Content Include="Content\PostFiles\EF.PNG" />
     <Content Include="Content\PostFiles\egg.png" />
     <Content Include="Content\PostFiles\wallpaper_11_18_2013\preview.png" />
     <Content Include="Content\site.css">
