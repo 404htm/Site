@@ -440,4 +440,8 @@ aside.panel {
 aside .panel-heading {
   background-color: #101010 !important;
 }
+article p,
+summary p {
+  max-width: 60em;
+}
 /*# sourceMappingURL=site.css.map */

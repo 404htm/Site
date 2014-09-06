@@ -144,6 +144,7 @@
     <Content Include="Fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Images\Icons\Contact\email.png" />
     <Content Include="Images\Icons\Contact\github.png" />
