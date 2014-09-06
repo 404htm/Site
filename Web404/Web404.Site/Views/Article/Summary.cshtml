@@ -1,13 +1,17 @@
 ﻿@model PageSummary
 
-<summary class="panel panel-default">
+<summary class="panel panel-default sys-panel">
 	<div class="panel-heading">
 		@Model.Date.ToShortDateString() -
 		<h3>@Model.Title</h3><span class="ui-icon ui-icon-newwin"></span>
-		<span class="right"><span class="glyphicon glyphicon-collapse-down"></span></span>
+		<span style="float: right;">
+			<a href="@Url.Action("About")" class="sys-ajax">
+				<span class="glyphicon glyphicon-collapse-down"></span>
+			</a>
+		</span>
 	</div>
 
-	<div class="panel-body">
+	<div class="panel-body sys-target">
 
 		@Html.Raw(Model.Summary)
 

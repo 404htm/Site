@@ -1,7 +1,7 @@
 ﻿$(function () {
 
 	sys.setupTagGraph();
-	$("#stfu").live("click", sys.stfu);
+	$(".sys-ajax").on("click", sys.ajaxLoad);
 	
 });
 
@@ -9,20 +9,14 @@ var sys = new function () {
 	var tags;
 
 	var _speed = 750;
-	var _txt_placeholder = "<p class='txt_placeholder'>...</p>";
 
-	this.stfu = function(el) {
-		$(".blah").hide(_speed).parent().append(_txt_placeholder).show(_speed);
+	this.ajaxLoad = function (evnt) {
+		var url = $(this).attr("href");
+		var target = $(this).parents(".sys-panel").find(".sys-target");
+		target.load(url);
+		return false;
 	};
 
-	this.ustfu = function () {
-		$(".blah").hide(1000);
-		$(this)
-			.css("color: black")
-			.text("hide text")
-			.die()
-			.live("click", sys.stfu);
-	};
 
 	this.setupTagGraph = function() 
 	{
