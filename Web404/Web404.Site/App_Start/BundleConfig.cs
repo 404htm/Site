@@ -10,7 +10,6 @@ namespace Web404.Site.App_Start
         {
             bundles.Add(new ScriptBundle("~/bundles/default")
 				.Include(
-					"~/Scripts/jquery-{version}.js",
 					"~/Scripts/d3.v3.js",
 					"~/Scripts/site.js",
 					"~/Scripts/bootstrap.js"
