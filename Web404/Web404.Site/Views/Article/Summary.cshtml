@@ -5,20 +5,23 @@
 		@Model.Date.ToShortDateString() -
 		<h3>@Model.Title</h3><span class="ui-icon ui-icon-newwin"></span>
 		<span style="float: right;">
-			<a href="@Url.Action("About")" class="sys-ajax">
+			<a href="@Url.Action("ArticleBody", new {id = Model.URLName})" class="sys-ajax">
 				<span class="glyphicon glyphicon-collapse-down"></span>
 			</a>
 		</span>
 	</div>
 
-	<div class="panel-body sys-target">
+	<div class="panel-body">
 
 		@Html.Raw(Model.Summary)
 
-		@if (!Model.IsComplete)
-		{
-			<text>...</text>
-		}
+
+		<div class="sys-target">
+			@if (!Model.IsComplete)
+			{
+				<text>...</text>
+			}
+		</div>
 	</div>
 
 	<div class="tags panel-footer">

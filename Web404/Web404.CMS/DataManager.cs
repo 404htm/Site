@@ -128,5 +128,16 @@ namespace Web404.CMS
 				.ToList();
 			}
 		}
+
+		public string GetPageContent(string ID)
+		{
+			using (var db = new Context(_cnn))
+			{
+				return db.Pages
+				.Where(p => p.URLName == ID && p.Active)
+				.Select(p => p.Content)
+				.SingleOrDefault();
+			}
+		}
 	}
 }
