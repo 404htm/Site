@@ -11,9 +11,19 @@ var sys = new function () {
 	var _speed = 750;
 
 	this.ajaxLoad = function (evnt) {
-		var url = $(this).attr("href");
-		var target = $(this).parents(".sys-panel").find(".sys-target");
-		target.load(url);
+		var el = $(this);
+		var url = el.attr("href");
+		var target = el.parents(".sys-panel").find(".sys-target");
+		$.ajax(url)
+		.done(function (r)
+		{
+			var html = $(r);
+			target.append(r);
+			updateSection(html);
+			
+		});
+		//target.load(url, updateSection(el));
+		
 		return false;
 	};
 
@@ -89,5 +99,10 @@ var sys = new function () {
 		gtags.select("text")
 		.attr("dy", function () { return w_bar / 2 + Math.min(w_bar * .80, 12) / 2; })
 		.attr("font-size", function () { return Math.min(w_bar * .80, 12) + "px" });
+	}
+
+	var updateSection = function(el)
+	{
+		Rainbow.color();
 	}
 };

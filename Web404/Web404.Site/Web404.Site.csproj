@@ -158,6 +158,13 @@
     <Content Include="Scripts\d3.v3.min.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
+    <Content Include="Scripts\language\csharp.js" />
+    <Content Include="Scripts\language\css.js" />
+    <Content Include="Scripts\language\generic.js" />
+    <Content Include="Scripts\language\haskell.js" />
+    <Content Include="Scripts\language\html.js" />
+    <Content Include="Scripts\language\javascript.js" />
+    <Content Include="Scripts\rainbow.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Web.config" />
   </ItemGroup>

@@ -12,7 +12,11 @@ namespace Web404.Site.App_Start
 				.Include(
 					"~/Scripts/d3.v3.js",
 					"~/Scripts/site.js",
-					"~/Scripts/bootstrap.js"
+					"~/Scripts/bootstrap.js",
+					"~/Scripts/rainbow.js",
+					"~/Scripts/language/javascript.js",
+					"~/Scripts/language/csharp.js",
+					"~/Scripts/language/html.js"
 				));
 
             bundles.Add(
@@ -20,7 +24,7 @@ namespace Web404.Site.App_Start
 					//.Include("~/Content/grid.less")
 					.Include("~/Content/bootstrap.css")
 					.Include("~/Content/site.css")
-					
+					.Include("~/Content/rainbow.css")
 				);
 
 		}
