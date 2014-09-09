@@ -1,7 +1,6 @@
 ﻿$(function () {
 
-	sys.setupTagGraph();
-	$(".sys-ajax").on("click", sys.ajaxLoad);
+	sys.start();
 	
 });
 
@@ -9,6 +8,12 @@ var sys = new function () {
 	var tags;
 
 	var _speed = 750;
+
+	this.start = function() {
+			$(".sys-ajax").on("click", sys.ajaxLoad);
+			this.setupTagGraph();
+			updateSection($("body"));
+	};
 
 	this.ajaxLoad = function (evnt) {
 		var el = $(this);
@@ -18,8 +23,8 @@ var sys = new function () {
 		.done(function (r)
 		{
 			var html = $(r);
-			target.append(r);
-			updateSection(html);
+			target.html(html);
+			updateSection(target);
 			
 		});
 		//target.load(url, updateSection(el));
@@ -103,6 +108,27 @@ var sys = new function () {
 
 	var updateSection = function(el)
 	{
-		Rainbow.color();
+		Rainbow.color(el);
+
+		el.find(".html-demo").each(function () {
+			var html = $(this).text();
+			//console.log("demo");
+			//console.log(html);
+			//$(this).text(html);
+
+			$("<div class='sys-demo'></div>").html(html).insertAfter($(this));
+		});
+
+		el.find(".js-demo").each(function () {
+			var text = $(this).text();
+			//var test = $.globalEval("function(){"+text+"}");
+			//test();
+			//$(this).html("<button>Run</button>").click()
+			//test();
+		});
+
+		
+		
+		
 	}
 };

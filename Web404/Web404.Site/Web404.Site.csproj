@@ -131,6 +131,7 @@
     <Content Include="Content\PostFiles\EF.PNG" />
     <Content Include="Content\PostFiles\egg.png" />
     <Content Include="Content\PostFiles\wallpaper_11_18_2013\preview.png" />
+    <Content Include="Content\rainbow.css" />
     <Content Include="Content\site.css">
       <DependentUpon>site.less</DependentUpon>
     </Content>
@@ -145,6 +146,7 @@
     <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\PostFiles\test.pdf" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Images\Icons\Contact\email.png" />
     <Content Include="Images\Icons\Contact\github.png" />
