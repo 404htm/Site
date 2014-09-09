@@ -121,9 +121,10 @@ var sys = new function () {
 
 		el.find(".js-demo").each(function () {
 			var text = $(this).text();
-			//var test = $.globalEval("function(){"+text+"}");
-			//test();
-			//$(this).html("<button>Run</button>").click()
+			console.log(text);
+			var test = function () { $.globalEval(text); };
+		
+			$("<button>Run</button>").insertAfter($(this)).click(test);
 			//test();
 		});
 
