@@ -46,6 +46,9 @@ summary {
   color: #ffffff;
   border: none;
 }
+header h1 {
+  padding-bottom: 5px;
+}
 .header {
   display: block;
   margin: 0;
