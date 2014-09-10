@@ -8,6 +8,8 @@ var sys = new function () {
 	var tags;
 
 	var _speed = 750;
+	var open_icon = "glyphicon-collapse-down";
+	var close_icon = "glyphicon-collapse-up";
 
 	this.start = function() {
 			$(".sys-ajax").on("click", sys.ajaxLoad);
@@ -18,19 +20,46 @@ var sys = new function () {
 	this.ajaxLoad = function (evnt) {
 		var el = $(this);
 		var url = el.attr("href");
-		var target = el.parents(".sys-panel").find(".sys-target");
+		var target = findTarget(el);
+		
+
 		$.ajax(url)
 		.done(function (r)
 		{
 			var html = $(r);
 			target.html(html);
 			updateSection(target);
-			
+
+			el.unbind("click");
+			el.bind("click", collapse);
+
+			var icon_loc = el.data("icon-element");
+			if(icon_loc) el.find(icon_loc).removeClass(open_icon).addClass(close_icon);
 		});
-		//target.load(url, updateSection(el));
+		
 		
 		return false;
 	};
+
+	var collapse = function (evnt) {
+		var el = $(this);
+		var target = findTarget(el);
+		target.empty();
+
+		el.unbind("click");
+		el.bind("click", sys.ajaxLoad);
+
+		var icon_loc = el.data("icon-element");
+		if (icon_loc)  el.find(icon_loc).removeClass(close_icon).addClass(open_icon);
+
+		return false;
+	}
+
+	var findTarget = function (el) {
+		var target = el.parents(".sys-panel").find(".sys-target");
+		//TODO: Explicit target
+		return target;
+	}
 
 
 	this.setupTagGraph = function() 
@@ -132,4 +161,6 @@ var sys = new function () {
 		
 		
 	}
+
+	
 };
