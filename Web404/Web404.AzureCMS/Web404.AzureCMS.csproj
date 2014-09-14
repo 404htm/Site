@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataLoader.cs" />
     <Compile Include="PostType.cs" />
     <Compile Include="PostEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
