@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Web404.CMS
+namespace Web404.AzureCMS
 {
-	class UploadUtils
-	{
-	}
+	public enum PostType { Main, Article, Tool, Snippet, News }
 }
