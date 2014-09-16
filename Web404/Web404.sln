@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web404.CMS.Tests", "Web404.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web404.AzureCMS", "Web404.AzureCMS\Web404.AzureCMS.csproj", "{C3F8B2EF-B587-44E0-84D5-173CFD70C3A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web404.Uploader", "Web404.Uploader\Web404.Uploader.csproj", "{C5E41735-137D-47DF-BAA6-C3EE3574507F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{C3F8B2EF-B587-44E0-84D5-173CFD70C3A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3F8B2EF-B587-44E0-84D5-173CFD70C3A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3F8B2EF-B587-44E0-84D5-173CFD70C3A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5E41735-137D-47DF-BAA6-C3EE3574507F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E41735-137D-47DF-BAA6-C3EE3574507F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E41735-137D-47DF-BAA6-C3EE3574507F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E41735-137D-47DF-BAA6-C3EE3574507F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
