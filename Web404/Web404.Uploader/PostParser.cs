@@ -26,9 +26,11 @@ namespace Web404.Uploader
 				if(string.Compare(f.Name, "post.html", true) == 0)
 				{
 					var post  = new PostEntity("test", DateTime.Now, PostType.Article);
-
-
-					_uploader.SavePost(post);
+					using (var str = f.OpenRead())
+					{
+						_uploader.SavePost(post, str);
+					}
+					
 				}
 				else
 				{

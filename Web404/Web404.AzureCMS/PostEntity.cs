@@ -13,7 +13,7 @@ namespace Web404.AzureCMS
 		{
 			public PostEntity(string URLTitle, DateTime date, PostType type)
 			{
-				PartitionKey= "*";
+				PartitionKey= "2014";
 				RowKey = URLTitle;
 			}
 
