@@ -13,8 +13,9 @@ namespace Web404.AzureCMS
 		{
 			public PostEntity(string URLTitle, DateTime date, PostType type)
 			{
-				PartitionKey= "2014";
+				PartitionKey= date.Year.ToString();
 				RowKey = URLTitle;
+				Type = type;
 			}
 
 			public PostType Type { get; set; }
