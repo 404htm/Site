@@ -30,11 +30,11 @@ namespace Web404.Uploader
 			var ms = new MemoryStream(Encoding.UTF8.GetBytes(article));
 			_uploader.SavePost(post, ms);
 
-			foreach(var f in files)
+			foreach(var file in files.Where(f => string.Compare(f.Name, "thumbs.db", true) != 0))
 			{
-				using(var str = f.OpenRead())
+				using(var str = file.OpenRead())
 				{
-					_uploader.SaveRelatedFile(post, f.Name, str);
+					_uploader.SaveRelatedFile(post, file.Name, str);
 				}
 			}
 		}
