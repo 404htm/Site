@@ -11,8 +11,20 @@ namespace Web404.Uploader
 	{
 		static void Main(string[] args)
 		{
-			var directory = @"C:\Users\Kelly Gendron\Source\Repos\BlogPosts\Articles\EFMisconceptions";
-			var uploader = new AzureDataLoader("");
+			string directory;
+
+			if(args.Count() < 1)
+			{
+				Console.WriteLine("Enter Directory Name:");
+				directory = Console.ReadLine();
+			}
+			else
+			{
+				directory = args[0];
+			}
+
+
+			var uploader = AzureDataLoader.CreateDevLoader();
 			var parser = new PostParser(uploader);
 			parser.UploadDirectory(directory);
 		}

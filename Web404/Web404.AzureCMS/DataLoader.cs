@@ -12,29 +12,50 @@ namespace Web404.AzureCMS
 {
 	public class AzureDataLoader
 	{
-		string _cnn;
+		CloudStorageAccount _acct;
 
-		public AzureDataLoader(string cnn)
+		private AzureDataLoader(CloudStorageAccount acct)
 		{
-			_cnn = cnn;
+			_acct = acct;
 		}
+
+		public static AzureDataLoader CreateDevLoader()
+		{
+			return new AzureDataLoader(CloudStorageAccount.DevelopmentStorageAccount);
+		}
+
+		//public static AzureDataLoader Create(string connectionStr)
+		//{
+		//	var acct = new CloudStorageAccount(connectionStr, true);
+		//	return new AzureDataLoader(acct);
+		//}
 
 		public void SavePost(PostEntity post, Stream postBody)
 		{
 
-			var storageAccount = CloudStorageAccount.DevelopmentStorageAccount;
-			var tableClient = storageAccount.CreateCloudTableClient();
+			
+			var tableClient = _acct.CreateCloudTableClient();
 
 			CloudTable table = tableClient.GetTableReference("posts");
 			var insertOperation = TableOperation.InsertOrReplace(post);
 
 			table.Execute(insertOperation); 
 
-			var blobClient = storageAccount.CreateCloudBlobClient();
+			var blobClient = _acct.CreateCloudBlobClient();
 			var container = blobClient.GetContainerReference("posts");
-			var blob = container.GetBlockBlobReference("2014/FirstPost.html");
+			var blockName = string.Format("{0}/{1}.html", post.PartitionKey, post.RowKey);
+			var blob = container.GetBlockBlobReference(blockName);
 			blob.UploadFromStream(postBody);
 
+		}
+
+		public void SaveRelatedFile(PostEntity post, string fileName, Stream fileBody)
+		{
+			var blobClient = _acct.CreateCloudBlobClient();
+			var container = blobClient.GetContainerReference("files");
+			var blockName = string.Format("{0}/{1}/{2}", post.PartitionKey, post.RowKey, fileName);
+			var blob = container.GetBlockBlobReference(blockName);
+			blob.UploadFromStream(fileBody);
 		}
 
 	}

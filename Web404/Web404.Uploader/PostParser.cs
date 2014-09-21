@@ -20,40 +20,50 @@ namespace Web404.Uploader
 		public void UploadDirectory(string directory)
 		{
 			var dir = new DirectoryInfo(directory);
-			var files = dir.EnumerateFiles();
+			var files = dir.EnumerateFiles().ToList();
+
+			var postFile = files.Single(f => string.Compare(f.Name, "post.html", true) == 0);
+			files.Remove(postFile);
+
+			string article;
+			var post = parsePost(postFile, out article);
+			var ms = new MemoryStream(Encoding.UTF8.GetBytes(article));
+			_uploader.SavePost(post, ms);
 
 			foreach(var f in files)
 			{
-				if(string.Compare(f.Name, "post.html", true) == 0)
+				using(var str = f.OpenRead())
 				{
-					
-					var xml = XDocument.Load(f.OpenRead());
-					var head = xml.Root.Element("head");
-					var body = xml.Root.Element("body");
-
-					var title = (string)head.Element("title");
-					var url = (string)head.Elements("meta").Select(m => m.Attribute("url")).Single(u => u!= null);
-					var tags = (string)head.Elements("meta").Select(m => m.Attribute("tags")).Single(u => u != null);
-
-					var summary = (string)body.Element("summary");
-					var article = (string)body.Element("article");
-					
-
-					var post = new PostEntity(url, DateTime.Now, PostType.Article);
-					post.Title = title;
-					post.Summary = summary;
-					post.Active =true;
-					post.Tags = tags;
-
-					var ms = new MemoryStream(Encoding.UTF8.GetBytes(article));
-					_uploader.SavePost(post, ms);
-				}
-				else
-				{
-					//_uploader.SaveFile();
+					_uploader.SaveRelatedFile(post, f.Name, str);
 				}
 			}
+		}
 
+		PostEntity parsePost(FileInfo file, out string article)
+		{
+			using (var str = file.OpenRead())
+			{
+				var xml = XDocument.Load(str);
+				var head = xml.Root.Element("head");
+				var body = xml.Root.Element("body");
+
+				var title = (string)head.Element("title");
+				var url = (string)head.Elements("meta").Select(m => m.Attribute("url")).Single(u => u != null);
+				var tags = (string)head.Elements("meta").Select(m => m.Attribute("tags")).Single(u => u != null);
+
+				var summary = (string)body.Element("summary");
+				article = (string)body.Element("article");
+
+				var post = new PostEntity(url, DateTime.Now, PostType.Article);
+				post.Title = title;
+				post.Summary = summary;
+				post.Active = true;
+				post.Tags = tags;
+
+				return post;
+
+			}
+			
 		}
 
 	}
