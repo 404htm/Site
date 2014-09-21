@@ -414,6 +414,7 @@ g.tag rect{
 }
 
 .contact {
+	.colorize;
 	color : white;
 	text-decoration: none;
 	display: block;
@@ -460,7 +461,7 @@ a.contact-email:hover, a.contact-so:hover, a.contact-li:hover, a.contact:hover, 
 	.transition;
 }
 
-#email:hover{   color: @c-font-highlight; .transition; }
+#email:hover{   color: @c-font-highlight; .transition;  }
 
 #RightColumn{
 	padding: 0;
@@ -487,4 +488,28 @@ aside .panel-heading
 
 article p, summary p{
 	max-width: 60em;
+}
+
+.colorize
+{
+	-webkit-animation: colorize 2s cubic-bezier(0, 0, .8, .4) 1;
+	animation: colorize 2s cubic-bezier(0, 0, .8, .4) 1;
+}
+
+@-webkit-keyframes colorize {
+    0% {
+        -webkit-filter: grayscale(100%);
+    }
+    100% {
+        -webkit-filter: grayscale(0%);
+    }
+}
+
+@keyframes colorize {
+    0% {
+        filter: grayscale(100%);
+    }
+    100% {
+        filter: grayscale(0%);
+    }
 }
