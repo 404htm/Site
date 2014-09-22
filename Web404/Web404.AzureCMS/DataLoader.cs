@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Table;
+using Web404.Common;
 
 namespace Web404.AzureCMS
 {
@@ -30,7 +31,7 @@ namespace Web404.AzureCMS
 		//	return new AzureDataLoader(acct);
 		//}
 
-		public void SavePost(PostEntity post, Stream postBody)
+		public void SavePost(PostSummary post, Stream postBody)
 		{
 
 			
@@ -49,7 +50,7 @@ namespace Web404.AzureCMS
 
 		}
 
-		public void SaveRelatedFile(PostEntity post, string fileName, Stream fileBody)
+		public void SaveRelatedFile(PostSummary post, string fileName, Stream fileBody)
 		{
 			var blobClient = _acct.CreateCloudBlobClient();
 			var container = blobClient.GetContainerReference("files");

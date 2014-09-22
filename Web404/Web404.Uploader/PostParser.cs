@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Web404.AzureCMS;
+using Web404.Common;
 
 namespace Web404.Uploader
 {
@@ -39,7 +40,7 @@ namespace Web404.Uploader
 			}
 		}
 
-		PostEntity parsePost(FileInfo file, out string article)
+		PostSummary parsePost(FileInfo file, out string article)
 		{
 			using (var str = file.OpenRead())
 			{
@@ -53,8 +54,9 @@ namespace Web404.Uploader
 
 				var summary = (string)body.Element("summary");
 				article = (string)body.Element("article");
+				
 
-				var post = new PostEntity(url, DateTime.Now, PostType.Article);
+				var post = new PostSummary(url, DateTime.Now, PostType.Article);
 				post.Title = title;
 				post.Summary = summary;
 				post.Active = true;

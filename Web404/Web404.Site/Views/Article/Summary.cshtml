@@ -1,11 +1,11 @@
-﻿@model PageSummary
+﻿@model Web404.Common.IPostSummary
 
 <summary class="panel panel-default sys-panel">
 	<div class="panel-heading">
 		@Model.Date.ToShortDateString() -
 		<h3>@Model.Title</h3><span class="ui-icon ui-icon-newwin"></span>
 		<span style="float: right;">
-			<a href="@Url.Action("ArticleBody", new {id = Model.URLName})" class="sys-ajax" data-icon-element="span">
+			<a href="@Url.Action("ArticleBody", new {id = Model.RowKey})" class="sys-ajax" data-icon-element="span">
 				<span class="glyphicon glyphicon-collapse-down"></span>
 			</a>
 		</span>
@@ -17,10 +17,9 @@
 
 
 		<div class="sys-target">
-			@if (!Model.IsComplete)
-			{
+			
 				<text>...</text>
-			}
+	
 		</div>
 	</div>
 

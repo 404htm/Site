@@ -40,10 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureCmsManager.cs" />
     <Compile Include="DataLoader.cs" />
-    <Compile Include="PostType.cs" />
-    <Compile Include="PostEntity.cs" />
+    <Compile Include="PostDetail.cs" />
+    <Compile Include="PostSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Web404.Common\Web404.Common.csproj">
+      <Project>{9e4397e1-84cf-438f-80ab-91176656c60a}</Project>
+      <Name>Web404.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

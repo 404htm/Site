@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+//using Web404.Common;
 
 namespace Web404.CMS
 {
-    public class DataManager
+    public class DataManager //: ICmsManager
     {
         string _cnn;
 		const int DEFAULT_PAGE_COUNT = 15;

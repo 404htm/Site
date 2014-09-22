@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 namespace Web404.Common
 {
-	public interface IPostUploader
-	{
-		void UploadPost(IPost)
-	}
+	public enum PostType { Main, Article, Tool, Snippet, News }
 }

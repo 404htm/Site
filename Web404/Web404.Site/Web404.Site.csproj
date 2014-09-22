@@ -209,9 +209,13 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Web404.CMS\Web404.CMS.csproj">
-      <Project>{848b0683-fa5a-4a48-bc27-79ac9f32e6d1}</Project>
-      <Name>Web404.CMS</Name>
+    <ProjectReference Include="..\Web404.AzureCMS\Web404.AzureCMS.csproj">
+      <Project>{c3f8b2ef-b587-44e0-84d5-173cfd70c3a5}</Project>
+      <Name>Web404.AzureCMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web404.Common\Web404.Common.csproj">
+      <Project>{9e4397e1-84cf-438f-80ab-91176656c60a}</Project>
+      <Name>Web404.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
