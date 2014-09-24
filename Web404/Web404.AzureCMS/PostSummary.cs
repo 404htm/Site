@@ -23,6 +23,18 @@ namespace Web404.AzureCMS
 			Type = type;
 		}
 
+		public string ID
+		{
+			get { return base.RowKey; }
+			set { base.RowKey = value; }
+		}
+
+		public string Partition
+		{
+			get { return base.PartitionKey; }
+			set {  base.PartitionKey = Partition; }
+		}
+
 		public PostType Type { get; set; }
 		public DateTime Date { get; private set; }
 		public bool Active { get; set; }

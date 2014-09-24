@@ -10,5 +10,6 @@ namespace Web404.AzureCMS
 	public class PostDetail : PostSummary, IPostDetail
 	{
 		public string ArticleBody { get; set; }
+
 	}
 }
