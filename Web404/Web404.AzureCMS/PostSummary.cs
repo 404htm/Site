@@ -21,6 +21,7 @@ namespace Web404.AzureCMS
 			PartitionKey= date.Year.ToString();
 			RowKey = URLTitle;
 			Type = type;
+			Date = date;
 		}
 
 		public string ID

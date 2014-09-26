@@ -52,11 +52,14 @@ namespace Web404.Uploader
 				var url = (string)head.Elements("meta").Select(m => m.Attribute("url")).Single(u => u != null);
 				var tags = (string)head.Elements("meta").Select(m => m.Attribute("tags")).Single(u => u != null);
 
-				var summary = new XElement("div", body.Element("summary").Nodes()).ToString();
-				article = new XElement("div", body.Element("article").Nodes()).ToString();
-				
-
 				var post = new PostSummary(url, DateTime.Now, PostType.Article);
+
+				string fragment = String.Concat(post.Partition, "/", post.ID, "/");
+				var storageUrl = new Uri(_uploader.StorageEndpoint, fragment).ToString();
+
+				var summary = new XElement("div", body.Element("summary").Nodes()).FixLinks(storageUrl).ToString();
+				article = new XElement("div", body.Element("article").Nodes()).FixLinks(storageUrl).ToString();
+				
 				post.Title = title;
 				post.Summary = summary;
 				post.Active = true;

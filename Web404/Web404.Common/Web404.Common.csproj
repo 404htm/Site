@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HtmlUtility.cs" />
     <Compile Include="ICmsManager.cs" />
     <Compile Include="IPostDetail.cs" />
     <Compile Include="IPostSummary.cs" />
