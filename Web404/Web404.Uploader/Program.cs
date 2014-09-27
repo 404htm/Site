@@ -25,6 +25,8 @@ namespace Web404.Uploader
 
 
 			var uploader = AzureDataLoader.CreateDevLoader();
+			uploader.SetupEnvironment();
+
 			var parser = new PostParser(uploader);
 			parser.UploadDirectory(directory);
 		}

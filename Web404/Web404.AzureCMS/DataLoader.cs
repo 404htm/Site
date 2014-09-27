@@ -28,6 +28,18 @@ namespace Web404.AzureCMS
 			return new AzureDataLoader(CloudStorageAccount.DevelopmentStorageAccount);
 		}
 
+		public void SetupEnvironment()
+		{
+			var blobClient = _acct.CreateCloudBlobClient();
+
+			var container = blobClient.GetContainerReference(POST_FILE_CONTAINER);
+			BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
+			containerPermissions.PublicAccess = BlobContainerPublicAccessType.Blob;
+			container.SetPermissions(containerPermissions);
+			
+
+		}
+
 		//public static AzureDataLoader Create(string connectionStr)
 		//{
 		//	var acct = new CloudStorageAccount(connectionStr, true);
