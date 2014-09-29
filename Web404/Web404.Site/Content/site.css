@@ -477,4 +477,13 @@ summary p {
     filter: grayscale(0%);
   }
 }
+.summary-img {
+  border-radius: 6px;
+  float: left;
+  margin-right: 1em;
+}
+.summary-body {
+  float: left;
+  margin: 5px;
+}
 /*# sourceMappingURL=site.css.map */

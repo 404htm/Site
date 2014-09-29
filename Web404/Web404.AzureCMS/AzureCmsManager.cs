@@ -42,6 +42,11 @@ namespace Web404.AzureCMS
 		return result.Cast<IPostSummary>().ToList();
 	}
 
+	//public string GetPostContent()
+	//{
+
+	//}
+
 
 
 	}
