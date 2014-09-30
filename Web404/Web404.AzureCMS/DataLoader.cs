@@ -46,7 +46,7 @@ namespace Web404.AzureCMS
 		//	return new AzureDataLoader(acct);
 		//}
 
-		public void SavePost(PostSummary post, Stream postBody)
+		public void SavePost(PostSummary post, string postBody)
 		{
 			var tableClient = _acct.CreateCloudTableClient();
 
@@ -56,10 +56,10 @@ namespace Web404.AzureCMS
 			table.Execute(insertOperation); 
 
 			var blobClient = _acct.CreateCloudBlobClient();
-			var container = blobClient.GetContainerReference(POST_TABLE );
+			var container = blobClient.GetContainerReference(POST_CONTAINER);
 			var blockName = string.Format("{0}/{1}.html", post.PartitionKey, post.RowKey);
 			var blob = container.GetBlockBlobReference(blockName);
-			blob.UploadFromStream(postBody);
+			blob.UploadText(postBody, Encoding.UTF8);
 
 		}
 

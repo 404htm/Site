@@ -28,8 +28,7 @@ namespace Web404.Uploader
 
 			string article;
 			var post = parsePost(postFile, out article);
-			var ms = new MemoryStream(Encoding.UTF8.GetBytes(article));
-			_uploader.SavePost(post, ms);
+			_uploader.SavePost(post, article);
 
 			foreach(var file in files.Where(f => string.Compare(f.Name, "thumbs.db", true) != 0))
 			{
