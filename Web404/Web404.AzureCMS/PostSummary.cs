@@ -37,7 +37,7 @@ namespace Web404.AzureCMS
 		}
 
 		public PostType Type { get; set; }
-		public DateTime Date { get; private set; }
+		public DateTime Date { get; set; }
 		public bool Active { get; set; }
 		public string Title { get; set; }
 		public string Summary { get; set; }
