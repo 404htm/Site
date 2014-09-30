@@ -11,43 +11,66 @@ namespace Web404.AzureCMS
 {
 	public class AzureCmsManager : ICmsManager
 	{
-	CloudStorageAccount _acct;
-	const int DEFAULT_ITEMS = 10;
+		CloudStorageAccount _acct;
+		const int DEFAULT_ITEMS = 10;
+		const string POST_CONTAINER = "posts";
+		const string POST_TABLE = "posts";
+		const string POST_FILE_CONTAINER = "files";
 
-	private AzureCmsManager(CloudStorageAccount acct)
-	{
-		_acct = acct;
-	}
+		private AzureCmsManager(CloudStorageAccount acct)
+		{
+			_acct = acct;
+		}
 
-	public static AzureCmsManager CreateDev()
-	{
-		return new AzureCmsManager(CloudStorageAccount.DevelopmentStorageAccount);
-	}
+		public static AzureCmsManager CreateDev()
+		{
+			return new AzureCmsManager(CloudStorageAccount.DevelopmentStorageAccount);
+		}
 
-	public IEnumerable<IPostSummary> GetPostSummaries(int start = 0, int? postCount = null)
-	{
-		var tableClient = _acct.CreateCloudTableClient();
-		CloudTable posts = tableClient.GetTableReference("posts");
+		public IEnumerable<IPostSummary> GetPostSummaries(int start = 0, int? postCount = null)
+		{
+			var tableClient = _acct.CreateCloudTableClient();
+			CloudTable posts = tableClient.GetTableReference(POST_TABLE);
 
-		var result =
-		posts.CreateQuery<PostSummary>()
-		//.OrderByDescending(p => p.Date)
-		//.Where(p => p.Active)
-		//.Skip(start)
-		//.Take(postCount??DEFAULT_ITEMS)
-		.ToList()
-		;
-
-
-		return result.Cast<IPostSummary>().ToList();
-	}
-
-	//public string GetPostContent()
-	//{
-
-	//}
+			var result =
+			posts.CreateQuery<PostSummary>()
+			//.OrderByDescending(p => p.Date)
+			//.Where(p => p.Active)
+			//.Skip(start)
+			//.Take(postCount??DEFAULT_ITEMS)
+			.ToList()
+			;
 
 
+			return result.Cast<IPostSummary>().ToList();
+		}
 
+		public string GetPostContent(string partition, string id)
+		{
+			var blobClient = _acct.CreateCloudBlobClient();
+			var container = blobClient.GetContainerReference(POST_CONTAINER);
+			var blockName = string.Format("{0}/{1}.html", partition, id);
+			var blob = container.GetBlockBlobReference(blockName);
+
+			return blob.DownloadText(Encoding.UTF8);
+		}
+
+		public IPostDetail GetPost(string partition, string id)
+		{
+			var tableClient = _acct.CreateCloudTableClient();
+			CloudTable posts = tableClient.GetTableReference(POST_TABLE);
+
+			var result = posts.CreateQuery<PostDetail>()
+				.Where(p => p.PartitionKey == partition)
+				.Where(p => p.RowKey == id)
+				.SingleOrDefault();
+
+			if(result != null)
+			{
+				result.ArticleBody = GetPostContent(partition, id);
+			}
+
+			return result;
+		}
 	}
 }

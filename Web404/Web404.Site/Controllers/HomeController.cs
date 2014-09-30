@@ -16,19 +16,22 @@ namespace Web404.Site.Controllers
 	
         }
 
-		public ActionResult Article(string ID)
+		public ActionResult Post(string partition, string ID)
 		{
-			//var data = CMS.GetPage(ID);
-			//return View(data);
-			return View();
+			if(Request.IsAjaxRequest())
+			{
+				var data = CMS.GetPostContent(partition, ID);
+				return Content(data);
+				
+			}
+			else
+			{
+				var data = CMS.GetPost(partition, ID);
+				return View(data);
+			}
+			
 		}
 
-		public ActionResult ArticleBody(string ID)
-		{
-			//var data = CMS.GetPageContent(ID);
-			//return Content(data);
-			return View();
-		}
 
 		public ActionResult Tags(string ID)
 		{

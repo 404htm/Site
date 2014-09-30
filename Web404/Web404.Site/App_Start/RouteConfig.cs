@@ -12,6 +12,12 @@ namespace Web404.Site
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+				
+			routes.MapRoute(
+				name: "Posts",
+				url: "Post/{partition}/{id}",
+				defaults: new {controller = "Home", action = "Post"}
+			);
 
 			routes.MapRoute(
 				name: "Tags",

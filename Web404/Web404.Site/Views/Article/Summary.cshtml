@@ -5,7 +5,7 @@
 		@Model.Date.ToShortDateString() -
 		<h3>@Model.Title</h3><span class="ui-icon ui-icon-newwin"></span>
 		<span style="float: right;">
-			<a href="@Url.Action("ArticleBody", new {id = Model.ID, partition = Model.Partition})" class="sys-ajax" data-icon-element="span">
+			<a href="@Url.Action("Post", new {id = Model.ID, partition = Model.Partition})" class="sys-ajax" data-icon-element="span">
 				<span class="glyphicon glyphicon-collapse-down"></span>
 			</a>
 		</span>
