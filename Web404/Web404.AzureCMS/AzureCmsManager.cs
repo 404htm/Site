@@ -15,6 +15,7 @@ namespace Web404.AzureCMS
 		const int DEFAULT_ITEMS = 10;
 		const string POST_CONTAINER = "posts";
 		const string POST_TABLE = "posts";
+		const string TAG_TABLE = "tags";
 		const string POST_FILE_CONTAINER = "files";
 
 		private AzureCmsManager(CloudStorageAccount acct)

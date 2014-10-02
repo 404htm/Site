@@ -45,6 +45,7 @@
     <Compile Include="PostDetail.cs" />
     <Compile Include="PostSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TagIndex.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Web404.Common\Web404.Common.csproj">

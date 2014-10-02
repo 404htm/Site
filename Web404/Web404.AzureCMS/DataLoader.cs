@@ -17,6 +17,8 @@ namespace Web404.AzureCMS
 		const string POST_CONTAINER = "posts";
 		const string POST_TABLE = "posts";
 		const string POST_FILE_CONTAINER = "files";
+		const string TAG_TABLE = "tags";
+
 
 		private AzureDataLoader(CloudStorageAccount acct)
 		{
@@ -30,8 +32,19 @@ namespace Web404.AzureCMS
 
 		public void SetupEnvironment()
 		{
+			
+			var tableClient = _acct.CreateCloudTableClient();
+
+			var posts = tableClient.GetTableReference(POST_TABLE);
+			posts.CreateIfNotExists();
+
+			var tags = tableClient.GetTableReference(TAG_TABLE);
+			tags.CreateIfNotExists();
+
 			var blobClient = _acct.CreateCloudBlobClient();
 
+			
+			//Public Security
 			var container = blobClient.GetContainerReference(POST_FILE_CONTAINER);
 			BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
 			containerPermissions.PublicAccess = BlobContainerPublicAccessType.Blob;
@@ -52,8 +65,17 @@ namespace Web404.AzureCMS
 
 			CloudTable table = tableClient.GetTableReference(POST_TABLE);
 			var insertOperation = TableOperation.InsertOrReplace(post);
-
 			table.Execute(insertOperation); 
+
+			CloudTable tagTable = tableClient.GetTableReference(TAG_TABLE);
+			var tagBatch = new TableBatchOperation();
+
+			foreach(var tagName in post.Tags.Split(','))
+			{
+				var tag = new TagIndex(tagName, post.Partition, post.ID);
+				var tagInsert = TableOperation.InsertOrReplace(tag);
+				tagTable.Execute(tagInsert);
+			}
 
 			var blobClient = _acct.CreateCloudBlobClient();
 			var container = blobClient.GetContainerReference(POST_CONTAINER);
@@ -78,6 +100,8 @@ namespace Web404.AzureCMS
 				return new Uri(_acct.BlobEndpoint, _acct.Credentials.AccountName + "/" + POST_FILE_CONTAINER + "/");
 			}
 		}
+
+
 
 	}
 }
