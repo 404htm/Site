@@ -65,13 +65,9 @@
     <Folder Include="BaseData" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Pages.sql" />
-    <Build Include="dbo\Tables\Scripts.sql" />
+    <Build Include="dbo\Tables\Posts.sql" />
     <Build Include="dbo\Tables\Tags.sql" />
-    <Build Include="dbo\Tables\PageScripts.sql" />
-    <Build Include="dbo\Tables\PageTags.sql" />
-    <Build Include="dbo\Tables\Styles.sql" />
-    <Build Include="dbo\Tables\PageStyles.sql" />
+    <Build Include="dbo\Tables\PostTags.sql" />
     <Build Include="dbo\Tables\VisitorLog.sql" />
     <Build Include="dbo\Tables\ErrorLog.sql" />
     <Build Include="dbo\Tables\Sections.sql" />
