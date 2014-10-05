@@ -9,7 +9,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Web404.CMS
 {
-	public class AzureFileManger
+	public class AzureFileManger : Web404.CMS.IFileManger
 	{
 		const string POST_CONTAINER = "posts";
 		const string POST_FILE_CONTAINER = "files";
