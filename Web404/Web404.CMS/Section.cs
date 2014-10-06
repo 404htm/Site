@@ -16,12 +16,12 @@ namespace Web404.CMS
     {
         public Section()
         {
-            this.Pages = new HashSet<Page>();
+            this.Posts = new HashSet<Post>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Page> Pages { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

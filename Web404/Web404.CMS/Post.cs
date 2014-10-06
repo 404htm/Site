@@ -12,20 +12,24 @@ namespace Web404.CMS
     using System;
     using System.Collections.Generic;
     
-    public partial class Script
+    public partial class Post
     {
-        public Script()
+        public Post()
         {
-            this.Pages = new HashSet<Page>();
+            this.Tags = new HashSet<Tag>();
         }
     
         public int ID { get; set; }
-        public string Name { get; set; }
-        public int Version { get; set; }
         public System.DateTime Date { get; set; }
-        public string Content { get; set; }
-        public string Notes { get; set; }
+        public string Title { get; set; }
+        public string URLName { get; set; }
+        public string Summary { get; set; }
+        public bool IsMainPage { get; set; }
+        public bool Active { get; set; }
+        public Nullable<int> SectionID { get; set; }
+        public string Year { get; set; }
     
-        public virtual ICollection<Page> Pages { get; set; }
+        public virtual Section Section { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }

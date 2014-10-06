@@ -16,15 +16,13 @@ namespace Web404.CMS
     {
         public Tag()
         {
-            this.Pages = new HashSet<Page>();
+            this.Posts = new HashSet<Post>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Nullable<int> HomePageID { get; set; }
     
-        public virtual ICollection<Page> Pages { get; set; }
-        public virtual Page Page { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

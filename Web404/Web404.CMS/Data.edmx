@@ -16,7 +16,7 @@
           <Property Name="InnerException" Type="varchar(max)" />
           <Property Name="Description" Type="varchar(max)" />
         </EntityType>
-        <EntityType Name="Pages">
+        <EntityType Name="Posts">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -24,46 +24,19 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="100" />
           <Property Name="URLName" Type="varchar" MaxLength="100" />
-          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Year" Type="char" MaxLength="4" />
           <Property Name="Summary" Type="nvarchar(max)" />
-          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="IsMainPage" Type="bit" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="SectionID" Type="int" />
         </EntityType>
-        <EntityType Name="PageScripts">
-          <Key>
-            <PropertyRef Name="PageID" />
-            <PropertyRef Name="ScriptID" />
-          </Key>
-          <Property Name="PageID" Type="int" Nullable="false" />
-          <Property Name="ScriptID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PageStyles">
-          <Key>
-            <PropertyRef Name="PageID" />
-            <PropertyRef Name="StyleID" />
-          </Key>
-          <Property Name="PageID" Type="int" Nullable="false" />
-          <Property Name="StyleID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PageTags">
+        <EntityType Name="PostTags">
           <Key>
             <PropertyRef Name="PageID" />
             <PropertyRef Name="TagID" />
           </Key>
           <Property Name="PageID" Type="int" Nullable="false" />
           <Property Name="TagID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Scripts">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar(max)" />
-          <Property Name="Version" Type="int" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Content" Type="varchar(max)" />
-          <Property Name="Notes" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Sections">
           <Key>
@@ -72,15 +45,6 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="200" />
         </EntityType>
-        <EntityType Name="Styles">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" />
-          <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="Content" Type="nvarchar(max)" />
-        </EntityType>
         <EntityType Name="Tags">
           <Key>
             <PropertyRef Name="ID" />
@@ -88,7 +52,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="HomePageID" Type="int" />
         </EntityType>
         <EntityType Name="VisitorLog">
           <Key>
@@ -100,150 +63,81 @@
           <Property Name="Referer" Type="varchar(max)" />
           <Property Name="UserAgent" Type="varchar(max)" />
         </EntityType>
-        <Association Name="FK_Pages_Section">
-          <End Role="Sections" Type="Self.Sections" Multiplicity="0..1" />
-          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sections">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pages">
-              <PropertyRef Name="SectionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PageScripts_Pages">
-          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
-          <End Role="PageScripts" Type="Self.PageScripts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pages">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PageScripts">
-              <PropertyRef Name="PageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PageScripts_Scripts">
-          <End Role="Scripts" Type="Self.Scripts" Multiplicity="1" />
-          <End Role="PageScripts" Type="Self.PageScripts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Scripts">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PageScripts">
-              <PropertyRef Name="ScriptID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PageStyles_Pages">
-          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
-          <End Role="PageStyles" Type="Self.PageStyles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pages">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PageStyles">
-              <PropertyRef Name="PageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PageStyles_Styles">
-          <End Role="Styles" Type="Self.Styles" Multiplicity="1" />
-          <End Role="PageStyles" Type="Self.PageStyles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Styles">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PageStyles">
-              <PropertyRef Name="StyleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PageTags_Pages">
-          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
-          <End Role="PageTags" Type="Self.PageTags" Multiplicity="*" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="PostTags" Type="Self.PostTags" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Pages">
+            <Principal Role="Posts">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="PageTags">
+            <Dependent Role="PostTags">
               <PropertyRef Name="PageID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PageTags_Tags">
           <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
-          <End Role="PageTags" Type="Self.PageTags" Multiplicity="*" />
+          <End Role="PostTags" Type="Self.PostTags" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tags">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="PageTags">
+            <Dependent Role="PostTags">
               <PropertyRef Name="TagID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tags_ToTable">
-          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
-          <End Role="Tags" Type="Self.Tags" Multiplicity="*" />
+        <Association Name="FK_Posts_Section">
+          <End Role="Sections" Type="Self.Sections" Multiplicity="0..1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Pages">
-              <PropertyRef Name="ID" />
+            <Principal Role="Sections">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Tags">
-              <PropertyRef Name="HomePageID" />
+            <Dependent Role="Posts">
+              <PropertyRef Name="SectionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DataStoreContainer">
           <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PageScripts" EntityType="Self.PageScripts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PageStyles" EntityType="Self.PageStyles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PageTags" EntityType="Self.PageTags" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Scripts" EntityType="Self.Scripts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostTags" EntityType="Self.PostTags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Styles" EntityType="Self.Styles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VisitorLog" EntityType="Self.VisitorLog" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Pages_Section" Association="Self.FK_Pages_Section">
-            <End Role="Sections" EntitySet="Sections" />
-            <End Role="Pages" EntitySet="Pages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PageScripts_Pages" Association="Self.FK_PageScripts_Pages">
-            <End Role="Pages" EntitySet="Pages" />
-            <End Role="PageScripts" EntitySet="PageScripts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PageScripts_Scripts" Association="Self.FK_PageScripts_Scripts">
-            <End Role="Scripts" EntitySet="Scripts" />
-            <End Role="PageScripts" EntitySet="PageScripts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PageStyles_Pages" Association="Self.FK_PageStyles_Pages">
-            <End Role="Pages" EntitySet="Pages" />
-            <End Role="PageStyles" EntitySet="PageStyles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PageStyles_Styles" Association="Self.FK_PageStyles_Styles">
-            <End Role="Styles" EntitySet="Styles" />
-            <End Role="PageStyles" EntitySet="PageStyles" />
-          </AssociationSet>
           <AssociationSet Name="FK_PageTags_Pages" Association="Self.FK_PageTags_Pages">
-            <End Role="Pages" EntitySet="Pages" />
-            <End Role="PageTags" EntitySet="PageTags" />
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="PostTags" EntitySet="PostTags" />
           </AssociationSet>
           <AssociationSet Name="FK_PageTags_Tags" Association="Self.FK_PageTags_Tags">
             <End Role="Tags" EntitySet="Tags" />
-            <End Role="PageTags" EntitySet="PageTags" />
+            <End Role="PostTags" EntitySet="PostTags" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tags_ToTable" Association="Self.FK_Tags_ToTable">
-            <End Role="Pages" EntitySet="Pages" />
-            <End Role="Tags" EntitySet="Tags" />
+          <AssociationSet Name="FK_Posts_Section" Association="Self.FK_Posts_Section">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Context" annotation:LazyLoadingEnabled="false" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <EntitySet Name="ErrorLogs" EntityType="Data.ErrorLog" />
+          <EntitySet Name="Posts" EntityType="Data.Post" />
+          <EntitySet Name="Sections" EntityType="Data.Section" />
+          <EntitySet Name="Tags" EntityType="Data.Tag" />
+          <EntitySet Name="VisitorLogs" EntityType="Data.VisitorLog" />
+          <AssociationSet Name="FK_Posts_Section" Association="Data.FK_Posts_Section">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="PostTags" Association="Data.PostTags">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="ErrorLog">
           <Key>
             <PropertyRef Name="ID" />
@@ -255,7 +149,7 @@
           <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Page">
+        <EntityType Name="Post">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -263,38 +157,21 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="URLName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsMainPage" Type="Boolean" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Scripts" Relationship="Self.PageScripts" FromRole="Pages" ToRole="Scripts" />
-          <NavigationProperty Name="Styles" Relationship="Self.PageStyles" FromRole="Pages" ToRole="Styles" />
-          <NavigationProperty Name="Tags" Relationship="Self.PageTags" FromRole="Pages" ToRole="Tags" />
           <Property Name="SectionID" Type="Int32" />
-          <NavigationProperty Name="Section" Relationship="Data.FK_Pages_Section" FromRole="Page" ToRole="Section" />
-          <NavigationProperty Name="Tags1" Relationship="Data.FK_Tags_ToTable" FromRole="Page" ToRole="Tag" />
+          <NavigationProperty Name="Section" Relationship="Data.FK_Posts_Section" FromRole="Post" ToRole="Section" />
+          <NavigationProperty Name="Tags" Relationship="Data.PostTags" FromRole="Post" ToRole="Tag" />
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
         </EntityType>
-        <EntityType Name="Script">
+        <EntityType Name="Section">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Version" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Pages" Relationship="Self.PageScripts" FromRole="Scripts" ToRole="Pages" />
-        </EntityType>
-        <EntityType Name="Style">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Pages" Relationship="Self.PageStyles" FromRole="Styles" ToRole="Pages" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Posts" Relationship="Data.FK_Posts_Section" FromRole="Section" ToRole="Post" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -303,9 +180,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Pages" Relationship="Self.PageTags" FromRole="Tags" ToRole="Pages" />
-          <Property Name="HomePageID" Type="Int32" />
-          <NavigationProperty Name="Page" Relationship="Data.FK_Tags_ToTable" FromRole="Tag" ToRole="Page" />
+          <NavigationProperty Name="Posts" Relationship="Data.PostTags" FromRole="Tag" ToRole="Post" />
         </EntityType>
         <EntityType Name="VisitorLog">
           <Key>
@@ -317,80 +192,23 @@
           <Property Name="Referer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UserAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="PageScripts">
-          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
-          <End Role="Scripts" Type="Self.Script" Multiplicity="*" />
-        </Association>
-        <Association Name="PageStyles">
-          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
-          <End Role="Styles" Type="Self.Style" Multiplicity="*" />
-        </Association>
-        <Association Name="PageTags">
-          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
-          <End Role="Tags" Type="Self.Tag" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="Context" annotation:LazyLoadingEnabled="false" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
-          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
-          <EntitySet Name="Pages" EntityType="Self.Page" />
-          <EntitySet Name="Scripts" EntityType="Self.Script" />
-          <EntitySet Name="Styles" EntityType="Self.Style" />
-          <EntitySet Name="Tags" EntityType="Self.Tag" />
-          <EntitySet Name="VisitorLogs" EntityType="Self.VisitorLog" />
-          <AssociationSet Name="PageScripts" Association="Self.PageScripts">
-            <End Role="Pages" EntitySet="Pages" />
-            <End Role="Scripts" EntitySet="Scripts" />
-          </AssociationSet>
-          <AssociationSet Name="PageStyles" Association="Self.PageStyles">
-            <End Role="Pages" EntitySet="Pages" />
-            <End Role="Styles" EntitySet="Styles" />
-          </AssociationSet>
-          <AssociationSet Name="PageTags" Association="Self.PageTags">
-            <End Role="Pages" EntitySet="Pages" />
-            <End Role="Tags" EntitySet="Tags" />
-          </AssociationSet>
-          <EntitySet Name="Sections" EntityType="Data.Section" />
-          <AssociationSet Name="FK_Pages_Section" Association="Data.FK_Pages_Section">
-            <End Role="Section" EntitySet="Sections" />
-            <End Role="Page" EntitySet="Pages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tags_ToTable" Association="Data.FK_Tags_ToTable">
-            <End Role="Page" EntitySet="Pages" />
-            <End Role="Tag" EntitySet="Tags" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Section">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Pages" Relationship="Data.FK_Pages_Section" FromRole="Section" ToRole="Page" />
-        </EntityType>
-        <Association Name="FK_Pages_Section">
+        <Association Name="FK_Posts_Section">
           <End Type="Data.Section" Role="Section" Multiplicity="0..1" />
-          <End Type="Data.Page" Role="Page" Multiplicity="*" />
+          <End Type="Data.Post" Role="Post" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Section">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Page">
+            <Dependent Role="Post">
               <PropertyRef Name="SectionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tags_ToTable">
-          <End Type="Data.Page" Role="Page" Multiplicity="0..1" />
+        <Association Name="PostTags">
+          <End Type="Data.Post" Role="Post" Multiplicity="*" />
           <End Type="Data.Tag" Role="Tag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Page">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Tag">
-              <PropertyRef Name="HomePageID" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -399,97 +217,30 @@
           <EntitySetMapping Name="ErrorLogs">
             <EntityTypeMapping TypeName="Data.ErrorLog">
               <MappingFragment StoreEntitySet="ErrorLog">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="InnerException" ColumnName="InnerException" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pages">
-            <EntityTypeMapping TypeName="Data.Page">
-              <MappingFragment StoreEntitySet="Pages">
-                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="URLName" ColumnName="URLName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Scripts">
-            <EntityTypeMapping TypeName="Data.Script">
-              <MappingFragment StoreEntitySet="Scripts">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Styles">
-            <EntityTypeMapping TypeName="Data.Style">
-              <MappingFragment StoreEntitySet="Styles">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tags">
-            <EntityTypeMapping TypeName="Data.Tag">
-              <MappingFragment StoreEntitySet="Tags">
-                <ScalarProperty Name="HomePageID" ColumnName="HomePageID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VisitorLogs">
-            <EntityTypeMapping TypeName="Data.VisitorLog">
-              <MappingFragment StoreEntitySet="VisitorLog">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
-                <ScalarProperty Name="IP" ColumnName="IP" />
-                <ScalarProperty Name="Referer" ColumnName="Referer" />
-                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="PageScripts" TypeName="Data.PageScripts" StoreEntitySet="PageScripts">
-            <EndProperty Name="Pages">
-              <ScalarProperty Name="ID" ColumnName="PageID" />
-            </EndProperty>
-            <EndProperty Name="Scripts">
-              <ScalarProperty Name="ID" ColumnName="ScriptID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="PageStyles" TypeName="Data.PageStyles" StoreEntitySet="PageStyles">
-            <EndProperty Name="Pages">
-              <ScalarProperty Name="ID" ColumnName="PageID" />
-            </EndProperty>
-            <EndProperty Name="Styles">
-              <ScalarProperty Name="ID" ColumnName="StyleID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="PageTags" TypeName="Data.PageTags" StoreEntitySet="PageTags">
-            <EndProperty Name="Pages">
-              <ScalarProperty Name="ID" ColumnName="PageID" />
-            </EndProperty>
-            <EndProperty Name="Tags">
-              <ScalarProperty Name="ID" ColumnName="TagID" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="Data.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IsMainPage" ColumnName="IsMainPage" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="URLName" ColumnName="URLName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Sections">
             <EntityTypeMapping TypeName="Data.Section">
               <MappingFragment StoreEntitySet="Sections">
@@ -498,6 +249,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="Data.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitorLogs">
+            <EntityTypeMapping TypeName="Data.VisitorLog">
+              <MappingFragment StoreEntitySet="VisitorLog">
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="Referer" ColumnName="Referer" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PostTags" TypeName="Data.PostTags" StoreEntitySet="PostTags">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="ID" ColumnName="TagID" />
+            </EndProperty>
+            <EndProperty Name="Post">
+              <ScalarProperty Name="ID" ColumnName="PageID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

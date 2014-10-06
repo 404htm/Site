@@ -4,20 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using Web404.Common;
+using Microsoft.WindowsAzure.Storage;
 //using Web404.Common;
 
 namespace Web404.CMS
 {
-    public class DataManager //: ICmsManager
+	
+    public class DataManager: ICmsManager
     {
         string _cnn;
+		CloudStorageAccount _acct;
+
 		const int DEFAULT_PAGE_COUNT = 15;
 
-        public DataManager(string connectionString)
+		private DataManager(string connectionString, CloudStorageAccount acct)
         {
             _cnn = connectionString;
         }
 
+		public static DataManager CreateDev(string cnnStr)
+		{
+			return new DataManager(cnnStr, CloudStorageAccount.DevelopmentStorageAccount);
+		}
+
+		public static DataManager Create(string cnnStr, CloudStorageAccount cloudAccount)
+		{
+			return new DataManager(cnnStr, cloudAccount);
+		}
 
         public List<Page> GetPages(int start = 0, int? pageCount = null)
         {

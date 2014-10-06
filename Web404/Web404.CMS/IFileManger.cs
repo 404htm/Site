@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Web404.CMS
 {
-	interface IFileManger
+	public interface IFileManger
 	{
 		Uri GetFileURI(string year, string postID, string fileName);
 		string GetPostContent(string year, string postName);

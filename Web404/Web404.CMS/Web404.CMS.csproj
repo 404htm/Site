@@ -36,6 +36,7 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="PKCS12ProtectedConfigurationProvider">
       <HintPath>..\packages\Pkcs12ProtectedConfigurationProvider.1.0.1\lib\NET40\PKCS12ProtectedConfigurationProvider.dll</HintPath>
     </Reference>
@@ -52,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureFileManger.cs" />
     <Compile Include="Data.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -68,27 +70,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Data.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataLoader.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="ErrorLog.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
-    <Compile Include="Page.cs">
+    <Compile Include="HtmlUtility.cs" />
+    <Compile Include="ICmsManager.cs" />
+    <Compile Include="IFileManger.cs" />
+    <Compile Include="IPostDetail.cs" />
+    <Compile Include="IPostSummary.cs" />
+    <Compile Include="PageSummary.cs" />
+    <Compile Include="Post.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
-    <Compile Include="PageSummary.cs" />
+    <Compile Include="PostDetail.cs" />
+    <Compile Include="PostSummary.cs" />
+    <Compile Include="PostType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Script.cs">
-      <DependentUpon>Data.tt</DependentUpon>
-    </Compile>
     <Compile Include="Section.cs">
-      <DependentUpon>Data.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Style.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
     <Compile Include="Tag.cs">
@@ -125,12 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Web404.Common\Web404.Common.csproj">
-      <Project>{9e4397e1-84cf-438f-80ab-91176656c60a}</Project>
-      <Name>Web404.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
