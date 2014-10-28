@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Web404.Common
+namespace Web404.CMS
 {
 	public interface ICmsManager
 	{
@@ -15,6 +15,6 @@ namespace Web404.Common
 
 		string GetPostContent(string Partition, string ID);
 
-		IPostDetail GetPost(string partition, string ID);
+		//IPostDetail GetPost(string partition, string ID);
 	}
 }

@@ -71,7 +71,6 @@
       <DependentUpon>Data.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataLoader.cs" />
-    <Compile Include="DataManager.cs" />
     <Compile Include="ErrorLog.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
@@ -85,6 +84,7 @@
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
     <Compile Include="PostDetail.cs" />
+    <Compile Include="CMSManager.cs" />
     <Compile Include="PostSummary.cs" />
     <Compile Include="PostType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

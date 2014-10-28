@@ -208,16 +208,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Web404.AzureCMS\Web404.AzureCMS.csproj">
-      <Project>{c3f8b2ef-b587-44e0-84d5-173cfd70c3a5}</Project>
-      <Name>Web404.AzureCMS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Web404.Common\Web404.Common.csproj">
-      <Project>{9e4397e1-84cf-438f-80ab-91176656c60a}</Project>
-      <Name>Web404.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -11,8 +11,13 @@ namespace Web404.AzureCMS
 	{
 		public TagIndex(string tag, string postPartition, string postID)
 		{
-			this.PartitionKey = tag.Trim();
+			this.PartitionKey = tag.Trim().ToLowerInvariant();
 			this.RowKey = String.Format("{0}|{1}", postPartition, postID);
+		}
+
+		public TagIndex()
+		{
+
 		}
 
 		public string TagName { get {  return this.PartitionKey; } }

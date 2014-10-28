@@ -5,17 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Web404.AzureCMS;
-using Web404.Common;
+using Web404.CMS;
 
 namespace Web404.Uploader
 {
 	public class PostParser
 	{
-		AzureDataLoader _uploader;
-		public PostParser(AzureDataLoader uploader)
+		IFileManger _fileManager;
+		public PostParser(IFileManger fileManager, IDataManager postManager)
 		{
-			_uploader = uploader;
+			_fileManager = fileManager;
 		}
 
 		public void UploadDirectory(string directory)

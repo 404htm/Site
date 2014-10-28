@@ -13,7 +13,7 @@ namespace Web404.CMS
 	{
 		public PostSummary()
 		{
-
+			
 		}
 
 		public PostSummary(string URLTitle, DateTime date, PostType type)

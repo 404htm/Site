@@ -4,42 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using Web404.Common;
-using Microsoft.WindowsAzure.Storage;
-//using Web404.Common;
 
 namespace Web404.CMS
 {
-	
-    public class DataManager: ICmsManager
+    public class CmsManager : ICmsManager
     {
         string _cnn;
-		CloudStorageAccount _acct;
+		IFileManger _fileManager;
 
 		const int DEFAULT_PAGE_COUNT = 15;
 
-		private DataManager(string connectionString, CloudStorageAccount acct)
+        public CmsManager(string connectionString, IFileManger fileManager)
         {
             _cnn = connectionString;
+			_fileManager = fileManager;
         }
 
-		public static DataManager CreateDev(string cnnStr)
-		{
-			return new DataManager(cnnStr, CloudStorageAccount.DevelopmentStorageAccount);
-		}
 
-		public static DataManager Create(string cnnStr, CloudStorageAccount cloudAccount)
-		{
-			return new DataManager(cnnStr, cloudAccount);
-		}
-
-        public List<Page> GetPages(int start = 0, int? pageCount = null)
+        public List<Post> GetPosts(int start = 0, int? pageCount = null)
         {
             using (var db = new Context(_cnn))
             {
 				var take = pageCount ?? DEFAULT_PAGE_COUNT;
 
-                return db.Pages
+                return db.Posts
 				.Skip(() => start)
 				.Take(() => take)
 				.ToList();
@@ -54,7 +42,7 @@ namespace Web404.CMS
 				var take = pageCount ?? DEFAULT_PAGE_COUNT;
 
 				return db
-				.Pages
+				.Posts
 				.Where(p => p.Tags.Where(t => t.Name == tag).Any())
 				.Where(p => p.Active)
 				.OrderByDescending(p => p.Date)
@@ -64,7 +52,6 @@ namespace Web404.CMS
 				{
 					Summary = p.Summary,
 					Date = p.Date,
-					Description = p.Description,
 					ID = p.ID,
 					Tags = p.Tags.ToList(),
 					Section = p.Section.Name,
@@ -75,35 +62,35 @@ namespace Web404.CMS
 			}
 		}
 
-		public Page GetSectionDefaultPage(string sectionName)
+		public Post GetSectionDefaultPage(string sectionName)
 		{
 			using (var db = new Context(_cnn))
 			{
 				return db.Sections
 				.Single(s => s.Name == sectionName)
-				.Pages
+				.Posts
 				.Where(p => p.URLName == "index")
 				.SingleOrDefault();
 			}
 		}
 
-		public List<Page> GetSectionPages(string sectionName)
+		public List<Post> GetSectionPages(string sectionName)
 		{
 			using (var db = new Context(_cnn))
 			{
 				return db.Sections
 				.Single(s => s.Name == sectionName)
-				.Pages
+				.Posts
 				.Where(p => p.Active)
 				.ToList();
 			}
 		}
 
-		public Page GetPage(string pageUrl)
+		public Post GetPage(string pageUrl)
 		{
 			using (var db = new Context(_cnn))
 			{
-				return db.Pages
+				return db.Posts
 				.SingleOrDefault(p => p.URLName == pageUrl && p.Active);
 			}
 		}
@@ -112,7 +99,7 @@ namespace Web404.CMS
 		{
 			using (var db = new Context(_cnn))
 			{
-				return db.Pages
+				return db.Posts
 				.SingleOrDefault(p => p.ID == PageID && p.Active);
 			}
 		}
@@ -123,17 +110,16 @@ namespace Web404.CMS
 			{
 				var take = pageCount ?? DEFAULT_PAGE_COUNT;
 
-				return db.Pages
+				return db.Posts
 				.OrderByDescending(p => p.Date)
 				.Where(p => p.Active)
 				.Skip(() => start)
 				.Take(() => take)
 				.Select(p => new PageSummary
 					{
-						Summary = p.Summary??p.Content,
+						Summary = p.Summary,
 						IsComplete = p.Summary == null,
 						Date = p.Date,
-						Description = p.Description,
 						ID = p.ID,
 						Tags = p.Tags.ToList(),
 						Section = p.Section.Name,
@@ -144,15 +130,9 @@ namespace Web404.CMS
 			}
 		}
 
-		public string GetPageContent(string ID)
+		public string GetPostContent(string year, string title)
 		{
-			using (var db = new Context(_cnn))
-			{
-				return db.Pages
-				.Where(p => p.URLName == ID && p.Active)
-				.Select(p => p.Content)
-				.SingleOrDefault();
-			}
+			return _fileManager.GetPostContent(year, title);
 		}
 	}
 }

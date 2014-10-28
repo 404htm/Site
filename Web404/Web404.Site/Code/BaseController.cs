@@ -4,8 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Web404.AzureCMS;
-using Web404.Common;
+using Web404.CMS;
 
 namespace Web404.Site.Controllers
 {

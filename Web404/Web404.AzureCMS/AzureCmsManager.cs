@@ -36,14 +36,28 @@ namespace Web404.AzureCMS
 			var result =
 			posts.CreateQuery<PostSummary>()
 			//.OrderByDescending(p => p.Date)
-			//.Where(p => p.Active)
+			.Where(p => p.Active)
 			//.Skip(start)
 			//.Take(postCount??DEFAULT_ITEMS)
-			.ToList()
-			;
-
-
+			.ToList();
 			return result.Cast<IPostSummary>().ToList();
+		}
+
+		public IEnumerable<IPostSummary> GetPostSummariesByTag(string tag, int start=0, int? postCount = null)
+		{
+			tag = tag.Trim().ToLowerInvariant();
+
+			var tableClient = _acct.CreateCloudTableClient();
+			CloudTable tags = tableClient.GetTableReference(TAG_TABLE);
+			var ids = tags.CreateQuery<TagIndex>()
+				.Where(t => t.PartitionKey == tag)
+				.ToList();
+
+			foreach(var partition in ids.GroupBy(id => id.PostPartition))
+			{
+				var batch = new TableBatchOperation();
+				//var ret = Tab
+			}
 		}
 
 		public string GetPostContent(string partition, string id)
