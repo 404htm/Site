@@ -13,11 +13,14 @@ namespace Web404.Site.Controllers
 		protected ICmsManager CMS
 		{
 			get {
-				//var cnn = ConfigurationManager.ConnectionStrings["AzureSQL"].ConnectionString;
+				var cnn = ConfigurationManager.ConnectionStrings["AzureSQL"].ConnectionString;
 				//var cms = new CMS.DataManager(cnn);
 				//return cms;
 
-				return AzureCmsManager.CreateDev();
+				var fm = AzureFileManger.CreateDev();
+				var manager = new CmsManager(cnn, fm);
+
+				return manager;
 			}
 		}
     }

@@ -86,16 +86,27 @@ namespace Web404.CMS
 			}
 		}
 
-		public Post GetPage(string pageUrl)
+		public PostDetail GetPost(string year, string pageUrl)
 		{
 			using (var db = new Context(_cnn))
 			{
 				return db.Posts
-				.SingleOrDefault(p => p.URLName == pageUrl && p.Active);
+				.Select(p => new PostDetail
+				{
+					Summary = p.Summary,
+					Date = p.Date,
+					ID = p.ID,
+					Tags = p.Tags.ToList(),
+					//Section = p.Section.Name,
+					Title = p.Title,
+					Name = p.URLName
+
+				})
+				.SingleOrDefault(p => p.Name == pageUrl && p.Year == year && p.Active);
 			}
 		}
 
-		public object GetPage(int PageID)
+		public Post GetPost(int PageID)
 		{
 			using (var db = new Context(_cnn))
 			{
@@ -104,7 +115,7 @@ namespace Web404.CMS
 			}
 		}
 
-		public List<PageSummary> GetPageSummaries(int start = 0, int? pageCount = null)
+		public IEnumerable<PostSummary> GetPostSummaries(int start = 0, int? pageCount = null)
 		{
 			using (var db = new Context(_cnn))
 			{
@@ -115,16 +126,16 @@ namespace Web404.CMS
 				.Where(p => p.Active)
 				.Skip(() => start)
 				.Take(() => take)
-				.Select(p => new PageSummary
+				.Select(p => new PostSummary
 					{
 						Summary = p.Summary,
-						IsComplete = p.Summary == null,
+						//IsComplete = p.Summary == null,
 						Date = p.Date,
 						ID = p.ID,
 						Tags = p.Tags.ToList(),
-						Section = p.Section.Name,
+						//Section = p.Section.Name,
 						Title = p.Title,
-						URLName = p.URLName
+						Name = p.URLName
 					})
 				.ToList();
 			}

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Web404.Common;
+
 
 namespace Web404.CMS
 {
-	public class PostDetail : PostSummary, IPostDetail
+	public class PostDetail : PostSummary
 	{
 		public string ArticleBody { get; set; }
 

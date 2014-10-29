@@ -70,15 +70,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Data.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataLoader.cs" />
     <Compile Include="ErrorLog.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
     <Compile Include="HtmlUtility.cs" />
     <Compile Include="ICmsManager.cs" />
     <Compile Include="IFileManger.cs" />
-    <Compile Include="IPostDetail.cs" />
-    <Compile Include="IPostSummary.cs" />
     <Compile Include="PageSummary.cs" />
     <Compile Include="Post.cs">
       <DependentUpon>Data.tt</DependentUpon>

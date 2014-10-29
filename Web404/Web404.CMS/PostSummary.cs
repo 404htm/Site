@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.WindowsAzure.Storage.Table;
-using Web404.Common;
 
 namespace Web404.CMS
 {
@@ -18,29 +17,21 @@ namespace Web404.CMS
 
 		public PostSummary(string URLTitle, DateTime date, PostType type)
 		{
-			PartitionKey= date.Year.ToString();
-			RowKey = URLTitle;
+			Year = date.Year.ToString();
+			Name = URLTitle;
 			Type = type;
 			Date = date;
 		}
 
-		public string ID
-		{
-			get { return base.RowKey; }
-			set { base.RowKey = value; }
-		}
+		public int ID { get; set;}
+		public string Name { get; set;}
 
-		public string Partition
-		{
-			get { return base.PartitionKey; }
-			set {  base.PartitionKey = Partition; }
-		}
-
+		public string Year { get; set;}
 		public PostType Type { get; set; }
 		public DateTime Date { get; set; }
 		public bool Active { get; set; }
 		public string Title { get; set; }
 		public string Summary { get; set; }
-		public string Tags { get; set;}
+		public List<Tag> Tags { get; set;}
 	}
 }
