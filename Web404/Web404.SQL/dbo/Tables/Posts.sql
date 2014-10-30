@@ -1,15 +1,17 @@
 ﻿CREATE TABLE [dbo].[Posts] (
     [ID]          INT            IDENTITY (1, 1) NOT NULL,
     [Date]        DATETIME       NOT NULL,
-    [Title]       VARCHAR (100)  NULL,
-    [URLName]     VARCHAR (100)  NULL,
+	[Active]      BIT            NOT NULL,
+	[URLName]     VARCHAR (100)  NULL,
 	[Year]        CHAR(4) NULL,
+    [Title]       VARCHAR (100)  NULL,
+    
     [Summary]     NVARCHAR (MAX) NULL,
-	[IsMainPage]  Bit NOT NULL,
-    [Active]      BIT            NOT NULL,
-    [SectionID] INT NULL , 
+    
+    [Content] NVARCHAR(MAX) NULL, 
+    [PostTypeID] INT NOT NULL DEFAULT 0, 
     CONSTRAINT [PK_Posts_1] PRIMARY KEY CLUSTERED ([ID] ASC), 
-    CONSTRAINT [FK_Posts_Section] FOREIGN KEY ([SectionID]) REFERENCES [Sections]([ID]),
+    CONSTRAINT [FK_Posts_PostTypeID] FOREIGN KEY ([PostTypeID]) REFERENCES [PostType]([ID]),
 
 );
 

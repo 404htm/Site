@@ -25,13 +25,13 @@ namespace Web404.CMS
 
 		public int ID { get; set;}
 		public string Name { get; set;}
-
+		public string Title { get; set; }
 		public string Year { get; set;}
 		public PostType Type { get; set; }
 		public DateTime Date { get; set; }
 		public bool Active { get; set; }
-		public string Title { get; set; }
 		public string Summary { get; set; }
 		public List<Tag> Tags { get; set;}
+		public bool HasContent { get; set;}
 	}
 }
