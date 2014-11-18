@@ -31,7 +31,7 @@ namespace Web404.CMS
 		public DateTime Date { get; set; }
 		public bool Active { get; set; }
 		public string Summary { get; set; }
-		public List<Tag> Tags { get; set;}
+		public List<string> Tags { get; set;}
 		public bool HasContent { get; set;}
 	}
 }

@@ -14,14 +14,7 @@ namespace Web404.CMS
     
     public partial class Section
     {
-        public Section()
-        {
-            this.Posts = new HashSet<Post>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
-    
-        public virtual ICollection<Post> Posts { get; set; }
     }
 }

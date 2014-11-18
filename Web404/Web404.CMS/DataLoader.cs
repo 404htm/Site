@@ -8,39 +8,39 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Table;
 using Web404.CMS;
-using Web404.Common;
 
 namespace Web404.AzureCMS
 {
 	public class AzureDataLoader
 	{
 		CloudStorageAccount _acct;
+		string _cnn;
+
 		const string POST_CONTAINER = "posts";
-		const string POST_TABLE = "posts";
 		const string POST_FILE_CONTAINER = "files";
-		const string TAG_TABLE = "tags";
 
 
-		private AzureDataLoader(CloudStorageAccount acct)
+		private AzureDataLoader(CloudStorageAccount acct, string connectionString)
 		{
 			_acct = acct;
+			_cnn = connectionString;
 		}
 
-		public static AzureDataLoader CreateDevLoader()
+		public static AzureDataLoader CreateDevLoader(string connectionString)
 		{
-			return new AzureDataLoader(CloudStorageAccount.DevelopmentStorageAccount);
+			return new AzureDataLoader(CloudStorageAccount.DevelopmentStorageAccount, connectionString);
 		}
 
 		public void SetupEnvironment()
 		{
 			
-			var tableClient = _acct.CreateCloudTableClient();
+			//var tableClient = _acct.CreateCloudTableClient();
 
-			var posts = tableClient.GetTableReference(POST_TABLE);
-			posts.CreateIfNotExists();
+			//var posts = tableClient.GetTableReference(POST_TABLE);
+			//posts.CreateIfNotExists();
 
-			var tags = tableClient.GetTableReference(TAG_TABLE);
-			tags.CreateIfNotExists();
+			//var tags = tableClient.GetTableReference(TAG_TABLE);
+			//tags.CreateIfNotExists();
 
 			var blobClient = _acct.CreateCloudBlobClient();
 
@@ -60,29 +60,45 @@ namespace Web404.AzureCMS
 		//	return new AzureDataLoader(acct);
 		//}
 
-		public void SavePost(PostSummary post, string postBody)
+		public void SavePost(PostDetail post)
 		{
 			var tableClient = _acct.CreateCloudTableClient();
 
-			CloudTable table = tableClient.GetTableReference(POST_TABLE);
-			var insertOperation = TableOperation.InsertOrReplace(post);
-			table.Execute(insertOperation); 
+			using (var db = new Context(_cnn))
+            {
+				var cur = db.Posts.SingleOrDefault(p => p.URLName == post.Name);
+				if(cur == null)
+				{
+					cur = new Post();
+					db.Posts.Add(cur);
+				}
 
-			CloudTable tagTable = tableClient.GetTableReference(TAG_TABLE);
-			var tagBatch = new TableBatchOperation();
+				cur.Title = post.Title;
+				cur.Summary = post.Summary;
+				cur.URLName = post.Name;
+				cur.Year = post.Year;
+				cur.Active = true;
+				cur.Date = DateTime.Now;
+				cur.Content = post.ArticleBody;
 
-			foreach(var tagName in post.Tags.Split(','))
-			{
-				var tag = new TagIndex(tagName, post.Partition, post.ID);
-				var tagInsert = TableOperation.InsertOrReplace(tag);
-				tagTable.Execute(tagInsert);
+
+				foreach (var tagName in post.Tags)
+				{
+					//	var tag = new TagIndex(tagName, post.Partition, post.ID);
+					//var tagInsert = TableOperation.InsertOrReplace(tag);
+					//tagTable.Execute(tagInsert);
+				}
+
+				
+
 			}
 
-			var blobClient = _acct.CreateCloudBlobClient();
-			var container = blobClient.GetContainerReference(POST_CONTAINER);
-			var blockName = string.Format("{0}/{1}.html", post.PartitionKey, post.RowKey);
-			var blob = container.GetBlockBlobReference(blockName);
-			blob.UploadText(postBody, Encoding.UTF8);
+
+
+
+		
+
+			
 
 		}
 

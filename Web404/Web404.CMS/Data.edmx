@@ -22,13 +22,13 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="URLName" Type="varchar" MaxLength="100" />
           <Property Name="Year" Type="char" MaxLength="4" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
           <Property Name="Summary" Type="nvarchar(max)" />
-          <Property Name="IsMainPage" Type="bit" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="SectionID" Type="int" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="PostTypeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PostTags">
           <Key>
@@ -37,6 +37,14 @@
           </Key>
           <Property Name="PageID" Type="int" Nullable="false" />
           <Property Name="TagID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="ShowInMenu" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Sections">
           <Key>
@@ -87,15 +95,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Posts_Section">
-          <End Role="Sections" Type="Self.Sections" Multiplicity="0..1" />
+        <Association Name="FK_Posts_PostTypeID">
+          <End Role="PostType" Type="Self.PostType" Multiplicity="1" />
           <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Sections">
-              <PropertyRef Name="Id" />
+            <Principal Role="PostType">
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Posts">
-              <PropertyRef Name="SectionID" />
+              <PropertyRef Name="PostTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -103,6 +111,7 @@
           <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostTags" EntityType="Self.PostTags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostType" EntityType="Self.PostType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VisitorLog" EntityType="Self.VisitorLog" Schema="dbo" store:Type="Tables" />
@@ -114,8 +123,8 @@
             <End Role="Tags" EntitySet="Tags" />
             <End Role="PostTags" EntitySet="PostTags" />
           </AssociationSet>
-          <AssociationSet Name="FK_Posts_Section" Association="Self.FK_Posts_Section">
-            <End Role="Sections" EntitySet="Sections" />
+          <AssociationSet Name="FK_Posts_PostTypeID" Association="Self.FK_Posts_PostTypeID">
+            <End Role="PostType" EntitySet="PostType" />
             <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
         </EntityContainer>
@@ -126,11 +135,12 @@
         <EntityContainer Name="Context" annotation:LazyLoadingEnabled="false" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <EntitySet Name="ErrorLogs" EntityType="Data.ErrorLog" />
           <EntitySet Name="Posts" EntityType="Data.Post" />
+          <EntitySet Name="PostTypes" EntityType="Data.PostType" />
           <EntitySet Name="Sections" EntityType="Data.Section" />
           <EntitySet Name="Tags" EntityType="Data.Tag" />
           <EntitySet Name="VisitorLogs" EntityType="Data.VisitorLog" />
-          <AssociationSet Name="FK_Posts_Section" Association="Data.FK_Posts_Section">
-            <End Role="Section" EntitySet="Sections" />
+          <AssociationSet Name="FK_Posts_PostTypeID" Association="Data.FK_Posts_PostTypeID">
+            <End Role="PostType" EntitySet="PostTypes" />
             <End Role="Post" EntitySet="Posts" />
           </AssociationSet>
           <AssociationSet Name="PostTags" Association="Data.PostTags">
@@ -155,15 +165,24 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="URLName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsMainPage" Type="Boolean" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="SectionID" Type="Int32" />
-          <NavigationProperty Name="Section" Relationship="Data.FK_Posts_Section" FromRole="Post" ToRole="Section" />
-          <NavigationProperty Name="Tags" Relationship="Data.PostTags" FromRole="Post" ToRole="Tag" />
+          <Property Name="URLName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PostType" Relationship="Data.FK_Posts_PostTypeID" FromRole="Post" ToRole="PostType" />
+          <NavigationProperty Name="Tags" Relationship="Data.PostTags" FromRole="Post" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="PostType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ShowInMenu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Posts" Relationship="Data.FK_Posts_PostTypeID" FromRole="PostType" ToRole="Post" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -171,7 +190,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Posts" Relationship="Data.FK_Posts_Section" FromRole="Section" ToRole="Post" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -192,15 +210,15 @@
           <Property Name="Referer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UserAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_Posts_Section">
-          <End Type="Data.Section" Role="Section" Multiplicity="0..1" />
+        <Association Name="FK_Posts_PostTypeID">
+          <End Type="Data.PostType" Role="PostType" Multiplicity="1" />
           <End Type="Data.Post" Role="Post" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Section">
-              <PropertyRef Name="Id" />
+            <Principal Role="PostType">
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Post">
-              <PropertyRef Name="SectionID" />
+              <PropertyRef Name="PostTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -229,14 +247,23 @@
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="Data.Post">
               <MappingFragment StoreEntitySet="Posts">
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="IsMainPage" ColumnName="IsMainPage" />
+                <ScalarProperty Name="PostTypeID" ColumnName="PostTypeID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="URLName" ColumnName="URLName" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="URLName" ColumnName="URLName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostTypes">
+            <EntityTypeMapping TypeName="Data.PostType">
+              <MappingFragment StoreEntitySet="PostType">
+                <ScalarProperty Name="ShowInMenu" ColumnName="ShowInMenu" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

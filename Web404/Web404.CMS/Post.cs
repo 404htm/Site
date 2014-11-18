@@ -21,15 +21,15 @@ namespace Web404.CMS
     
         public int ID { get; set; }
         public System.DateTime Date { get; set; }
-        public string Title { get; set; }
-        public string URLName { get; set; }
-        public string Summary { get; set; }
-        public bool IsMainPage { get; set; }
         public bool Active { get; set; }
-        public Nullable<int> SectionID { get; set; }
+        public string URLName { get; set; }
         public string Year { get; set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public string Content { get; set; }
+        public int PostTypeID { get; set; }
     
-        public virtual Section Section { get; set; }
+        public virtual PostType PostType { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
     }
 }

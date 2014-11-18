@@ -54,7 +54,7 @@ namespace Web404.CMS
 					Date = p.Date,
 					ID = p.ID,
 					Tags = p.Tags.ToList(),
-					Section = p.Section.Name,
+					Section = p.PostType.Name,
 					Title = p.Title,
 					URLName = p.URLName
 				})
@@ -62,29 +62,29 @@ namespace Web404.CMS
 			}
 		}
 
-		public Post GetSectionDefaultPage(string sectionName)
-		{
-			using (var db = new Context(_cnn))
-			{
-				return db.Sections
-				.Single(s => s.Name == sectionName)
-				.Posts
-				.Where(p => p.URLName == "index")
-				.SingleOrDefault();
-			}
-		}
+		//public Post GetSectionDefaultPage(string sectionName)
+		//{
+		//	using (var db = new Context(_cnn))
+		//	{
+		//		return db.Sections
+		//		.Single(s => s.Name == sectionName)
+		//		.Posts
+		//		.Where(p => p.URLName == "index")
+		//		.SingleOrDefault();
+		//	}
+		//}
 
-		public List<Post> GetSectionPages(string sectionName)
-		{
-			using (var db = new Context(_cnn))
-			{
-				return db.Sections
-				.Single(s => s.Name == sectionName)
-				.Posts
-				.Where(p => p.Active)
-				.ToList();
-			}
-		}
+		//public List<Post> GetSectionPages(string sectionName)
+		//{
+		//	using (var db = new Context(_cnn))
+		//	{
+		//		return db.Sections
+		//		.Single(s => s.Name == sectionName)
+		//		.Posts
+		//		.Where(p => p.Active)
+		//		.ToList();
+		//	}
+		//}
 
 		public PostDetail GetPost(string year, string pageUrl)
 		{
@@ -96,7 +96,7 @@ namespace Web404.CMS
 					Summary = p.Summary,
 					Date = p.Date,
 					ID = p.ID,
-					Tags = p.Tags.ToList(),
+					Tags = p.Tags.Select(t => t.Name).ToList(),
 					//Section = p.Section.Name,
 					Title = p.Title,
 					Name = p.URLName
@@ -132,7 +132,7 @@ namespace Web404.CMS
 						//IsComplete = p.Summary == null,
 						Date = p.Date,
 						ID = p.ID,
-						Tags = p.Tags.ToList(),
+						Tags = p.Tags.Select(t => t.Name).ToList(),
 						//Section = p.Section.Name,
 						Title = p.Title,
 						Name = p.URLName
