@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="HtmlUtility.cs" />
     <Compile Include="ICmsManager.cs" />
+    <Compile Include="IDataLoader.cs" />
     <Compile Include="IFileManger.cs" />
     <Compile Include="PageSummary.cs" />
     <Compile Include="Post.cs">

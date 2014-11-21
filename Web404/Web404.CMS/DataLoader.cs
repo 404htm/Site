@@ -11,7 +11,7 @@ using Web404.CMS;
 
 namespace Web404.AzureCMS
 {
-	public class AzureDataLoader
+	public class AzureDataLoader : Web404.CMS.IDataLoader
 	{
 		CloudStorageAccount _acct;
 		string _cnn;
@@ -82,13 +82,14 @@ namespace Web404.AzureCMS
 				cur.Content = post.ArticleBody;
 
 
-				foreach (var tagName in post.Tags)
+				//foreach (var tagName in post.Tags)
 				{
 					//	var tag = new TagIndex(tagName, post.Partition, post.ID);
 					//var tagInsert = TableOperation.InsertOrReplace(tag);
 					//tagTable.Execute(tagInsert);
 				}
 
+				db.SaveChanges();
 				
 
 			}
