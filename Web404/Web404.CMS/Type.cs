@@ -10,11 +10,13 @@
 namespace Web404.CMS
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Section
+    public enum Type : int
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        Home = 0,
+        News = 1,
+        StandAlone = 2,
+        Projects = 3,
+        Experiments = 4
     }
 }

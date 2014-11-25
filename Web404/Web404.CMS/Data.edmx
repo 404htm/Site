@@ -23,11 +23,11 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="URLName" Type="varchar" MaxLength="100" />
-          <Property Name="Year" Type="char" MaxLength="4" />
+          <Property Name="SID" Type="varchar" MaxLength="100" />
+          <Property Name="Partition" Type="char" MaxLength="4" />
           <Property Name="Title" Type="varchar" MaxLength="100" />
           <Property Name="Summary" Type="nvarchar(max)" />
-          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Body" Type="nvarchar(max)" />
           <Property Name="PostTypeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PostTags">
@@ -42,16 +42,9 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" />
-          <Property Name="ShowInMenu" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Sections">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="ID" Nullable="false" Type="int" />
+          <Property Name="ShowInMenu" Nullable="false" Type="bit" />
+          <Property Name="DisplayName" MaxLength="200" Type="varchar" />
         </EntityType>
         <EntityType Name="Tags">
           <Key>
@@ -60,6 +53,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="SID" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="VisitorLog">
           <Key>
@@ -96,8 +90,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Posts_PostTypeID">
-          <End Role="PostType" Type="Self.PostType" Multiplicity="1" />
-          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <End Type="Self.PostType" Multiplicity="1" Role="PostType" />
+          <End Type="Self.Posts" Multiplicity="*" Role="Posts" />
           <ReferentialConstraint>
             <Principal Role="PostType">
               <PropertyRef Name="ID" />
@@ -112,7 +106,6 @@
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostTags" EntityType="Self.PostTags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostType" EntityType="Self.PostType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VisitorLog" EntityType="Self.VisitorLog" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_PageTags_Pages" Association="Self.FK_PageTags_Pages">
@@ -124,8 +117,8 @@
             <End Role="PostTags" EntitySet="PostTags" />
           </AssociationSet>
           <AssociationSet Name="FK_Posts_PostTypeID" Association="Self.FK_Posts_PostTypeID">
-            <End Role="PostType" EntitySet="PostType" />
-            <End Role="Posts" EntitySet="Posts" />
+            <End EntitySet="PostType" Role="PostType" />
+            <End EntitySet="Posts" Role="Posts" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -134,20 +127,15 @@
       <Schema Namespace="Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Context" annotation:LazyLoadingEnabled="false" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <EntitySet Name="ErrorLogs" EntityType="Data.ErrorLog" />
-          <EntitySet Name="Posts" EntityType="Data.Post" />
-          <EntitySet Name="PostTypes" EntityType="Data.PostType" />
-          <EntitySet Name="Sections" EntityType="Data.Section" />
+          <EntitySet Name="PostSummaries" EntityType="Data.PostSummary" />
           <EntitySet Name="Tags" EntityType="Data.Tag" />
           <EntitySet Name="VisitorLogs" EntityType="Data.VisitorLog" />
-          <AssociationSet Name="FK_Posts_PostTypeID" Association="Data.FK_Posts_PostTypeID">
-            <End Role="PostType" EntitySet="PostTypes" />
-            <End Role="Post" EntitySet="Posts" />
-          </AssociationSet>
           <AssociationSet Name="PostTags" Association="Data.PostTags">
-            <End Role="Post" EntitySet="Posts" />
+            <End Role="Post" EntitySet="PostSummaries" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="PostTypes" EntityType="Data.PostType" />
+          </EntityContainer>
         <EntityType Name="ErrorLog">
           <Key>
             <PropertyRef Name="ID" />
@@ -159,37 +147,19 @@
           <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Post">
+        <EntityType Name="PostSummary">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="URLName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PostTypeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PostType" Relationship="Data.FK_Posts_PostTypeID" FromRole="Post" ToRole="PostType" />
+          <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Date" Nullable="false" Precision="3" Type="DateTime" />
+          <Property Name="Active" Nullable="false" Type="Boolean" />
+          <Property Name="SID" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Partition" MaxLength="4" FixedLength="true" Unicode="false" Type="String" />
+          <Property Name="Title" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Summary" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="PostTypeID" Nullable="false" Type="Data.Type" />
           <NavigationProperty Name="Tags" Relationship="Data.PostTags" FromRole="Post" ToRole="Tag" />
-        </EntityType>
-        <EntityType Name="PostType">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ShowInMenu" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Posts" Relationship="Data.FK_Posts_PostTypeID" FromRole="PostType" ToRole="Post" />
-        </EntityType>
-        <EntityType Name="Section">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -198,6 +168,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Posts" Relationship="Data.PostTags" FromRole="Tag" ToRole="Post" />
         </EntityType>
         <EntityType Name="VisitorLog">
@@ -210,22 +181,28 @@
           <Property Name="Referer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UserAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_Posts_PostTypeID">
-          <End Type="Data.PostType" Role="PostType" Multiplicity="1" />
-          <End Type="Data.Post" Role="Post" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PostType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Post">
-              <PropertyRef Name="PostTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PostTags">
-          <End Type="Data.Post" Role="Post" Multiplicity="*" />
+          <End Type="Data.PostSummary" Role="Post" Multiplicity="*" />
           <End Type="Data.Tag" Role="Tag" Multiplicity="*" />
         </Association>
+        <EntityType Name="PostType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Nullable="false" Type="Int32" />
+          <Property Name="ShowInMenu" Nullable="false" Type="Boolean" />
+          <Property Name="DisplayName" MaxLength="200" FixedLength="false" Unicode="false" Type="String" />
+        </EntityType>
+        <EnumType Name="Type">
+          <Member Name="Home" Value="0" />
+          <Member Name="News" Value="1" />
+          <Member Name="StandAlone" Value="2" />
+          <Member Name="Projects" Value="3" />
+          <Member Name="Experiments" Value="4" />
+        </EnumType>
+        <EntityType Name="Post" BaseType="Data.PostSummary">
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -244,41 +221,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Posts">
-            <EntityTypeMapping TypeName="Data.Post">
+          <EntitySetMapping Name="PostSummaries">
+            <EntityTypeMapping TypeName="IsTypeOf(Data.PostSummary)">
               <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="PostTypeID" ColumnName="PostTypeID" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="URLName" ColumnName="URLName" />
+                <ScalarProperty Name="Partition" ColumnName="Partition" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PostTypes">
-            <EntityTypeMapping TypeName="Data.PostType">
-              <MappingFragment StoreEntitySet="PostType">
-                <ScalarProperty Name="ShowInMenu" ColumnName="ShowInMenu" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sections">
-            <EntityTypeMapping TypeName="Data.Section">
-              <MappingFragment StoreEntitySet="Sections">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tags">
             <EntityTypeMapping TypeName="Data.Tag">
               <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="SID" ColumnName="SID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -304,7 +264,16 @@
               <ScalarProperty Name="ID" ColumnName="PageID" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="PostTypes">
+            <EntityTypeMapping TypeName="Data.PostType">
+              <MappingFragment StoreEntitySet="PostType">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="ShowInMenu" ColumnName="ShowInMenu" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -28,4 +28,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="11cdebd2-bc17-4378-b31a-3aa1f64aa8d4" ChangeDateTime="11/22/2014 05:08:01">
+    <Property Name="ElementName" Value="[dbo].[Posts].[Content]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Posts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Body" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="52e9bc60-768d-4ac4-8e0b-67602dbee11e" ChangeDateTime="11/22/2014 05:08:17">
+    <Property Name="ElementName" Value="[dbo].[Posts].[Year]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Posts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Partition" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ece1d0a1-2b65-451f-9a42-f9e02e837b87" ChangeDateTime="11/22/2014 05:08:21">
+    <Property Name="ElementName" Value="[dbo].[Posts].[URLName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Posts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b6b626e7-5b4a-46bf-84a2-1158ce4ea7ef" ChangeDateTime="11/22/2014 05:18:13">
+    <Property Name="ElementName" Value="[dbo].[PostType].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PostType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SID" />
+  </Operation>
 </Operations>

@@ -84,7 +84,9 @@
     </Compile>
     <Compile Include="PostDetail.cs" />
     <Compile Include="CMSManager.cs" />
-    <Compile Include="PostSummary.cs" />
+    <Compile Include="PostSummary.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="PostType.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
@@ -94,10 +96,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Section.cs">
+    <Compile Include="Tag.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
-    <Compile Include="Tag.cs">
+    <Compile Include="Type.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
     <Compile Include="VisitorLog.cs">

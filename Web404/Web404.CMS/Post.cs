@@ -12,24 +12,8 @@ namespace Web404.CMS
     using System;
     using System.Collections.Generic;
     
-    public partial class Post
+    public partial class Post : PostSummary
     {
-        public Post()
-        {
-            this.Tags = new HashSet<Tag>();
-        }
-    
-        public int ID { get; set; }
-        public System.DateTime Date { get; set; }
-        public bool Active { get; set; }
-        public string URLName { get; set; }
-        public string Year { get; set; }
-        public string Title { get; set; }
-        public string Summary { get; set; }
-        public string Content { get; set; }
-        public int PostTypeID { get; set; }
-    
-        public virtual PostType PostType { get; set; }
-        public virtual ICollection<Tag> Tags { get; set; }
+        public string Body { get; set; }
     }
 }
