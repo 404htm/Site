@@ -56,4 +56,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="SID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c1672d7a-397d-4a3c-84a8-798a798161c8" ChangeDateTime="11/27/2014 02:18:17">
+    <Property Name="ElementName" Value="[dbo].[Tags].[IX_Tags_SID]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[dbo].[Tags]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IX_Tags_Name]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2f38aef3-a3ee-4147-a973-2312652e099a" ChangeDateTime="11/27/2014 02:24:24">
+    <Property Name="ElementName" Value="[dbo].[PostTags].[PageID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PostTags]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PostID" />
+  </Operation>
 </Operations>

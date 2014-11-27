@@ -27,9 +27,9 @@ namespace Web404.CMS
         }
     
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
-        public virtual DbSet<PostSummary> PostSummaries { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<PostType> PostTypes { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<VisitorLog> VisitorLogs { get; set; }
-        public virtual DbSet<PostType> PostTypes { get; set; }
     }
 }

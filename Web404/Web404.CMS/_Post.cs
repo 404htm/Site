@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Web404.CMS
 {
-	public class PostDetail : PostSummary
+	public partial class Post : IPostSummary
 	{
-		public string ArticleBody { get; set; }
-
+		public string TagsList {get { return string.Join(",", Tags.Select(t => t.Name)); }}
 	}
 }

@@ -14,8 +14,15 @@ namespace Web404.CMS
     
     public partial class PostType
     {
+        public PostType()
+        {
+            this.Posts = new HashSet<Post>();
+        }
+    
         public int ID { get; set; }
         public bool ShowInMenu { get; set; }
         public string DisplayName { get; set; }
+    
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

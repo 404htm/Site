@@ -78,13 +78,9 @@
     <Compile Include="ICmsManager.cs" />
     <Compile Include="IDataLoader.cs" />
     <Compile Include="IFileManger.cs" />
-    <Compile Include="PageSummary.cs" />
-    <Compile Include="Post.cs">
-      <DependentUpon>Data.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PostDetail.cs" />
+    <Compile Include="IPostSummary.cs" />
     <Compile Include="CMSManager.cs" />
-    <Compile Include="PostSummary.cs">
+    <Compile Include="Post.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
     <Compile Include="PostType.cs">
@@ -105,6 +101,8 @@
     <Compile Include="VisitorLog.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="_Post.cs" />
+    <Compile Include="_PostSummary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

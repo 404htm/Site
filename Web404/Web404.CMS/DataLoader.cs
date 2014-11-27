@@ -60,46 +60,15 @@ namespace Web404.AzureCMS
 		//	return new AzureDataLoader(acct);
 		//}
 
-		public void SavePost(PostDetail post)
+		public void SavePost(Post post)
 		{
 			var tableClient = _acct.CreateCloudTableClient();
 
 			using (var db = new Context(_cnn))
             {
-				var cur = db.Posts.SingleOrDefault(p => p.URLName == post.Name);
-				if(cur == null)
-				{
-					cur = new Post();
-					db.Posts.Add(cur);
-				}
-
-				cur.Title = post.Title;
-				cur.Summary = post.Summary;
-				cur.URLName = post.Name;
-				cur.Year = post.Year;
-				cur.Active = true;
-				cur.Date = DateTime.Now;
-				cur.Content = post.ArticleBody;
-
-
-				//foreach (var tagName in post.Tags)
-				{
-					//	var tag = new TagIndex(tagName, post.Partition, post.ID);
-					//var tagInsert = TableOperation.InsertOrReplace(tag);
-					//tagTable.Execute(tagInsert);
-				}
-
+				db.PostSummaries.Attach(post);
 				db.SaveChanges();
-				
-
 			}
-
-
-
-
-		
-
-			
 
 		}
 
@@ -114,7 +83,7 @@ namespace Web404.AzureCMS
 
 		public Uri GetFileURI(string year, string postID, string fileName)
 		{
-				return new Uri(_acct.BlobEndpoint, _acct.Credentials.AccountName + "/" + POST_FILE_CONTAINER + "/");
+			return new Uri(_acct.BlobEndpoint, _acct.Credentials.AccountName + "/" + POST_FILE_CONTAINER + "/");
 		}
 
 
