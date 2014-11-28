@@ -8,6 +8,10 @@ namespace Web404.CMS
 {
 	public partial class Post : IPostSummary
 	{
-		public string TagsList {get { return string.Join(",", Tags.Select(t => t.Name)); }}
+		string IPostSummary.TagList 
+		{
+			//TODO: Figure out why non-explicit implementation isn't working here
+			get { return string.Join(",", Tags.Select(t => t.Name)); }
+		}
 	}
 }

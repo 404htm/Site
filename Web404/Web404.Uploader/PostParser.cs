@@ -40,7 +40,7 @@ namespace Web404.Uploader
 			}
 		}
 
-		PostDetail parsePost(FileInfo file)
+		Post parsePost(FileInfo file)
 		{
 			using (var str = file.OpenRead())
 			{
@@ -53,13 +53,13 @@ namespace Web404.Uploader
 				var tags = (string)head.Elements("meta").Select(m => m.Attribute("tags")).Single(u => u != null);
 
 				//var post = new PostDetail(url, DateTime.Now, PostType.Article);
-				var post = new PostDetail();
-				post.Name = url;
+				var post = new Post();
+				post.SID = url;
 				post.Date = DateTime.Now;
-				post.Year = post.Date.Year.ToString();
+				post.Partition = post.Date.Year.ToString();
 
 
-				string fragment = String.Concat(post.Year, "/", post.ID, "/");
+				string fragment = String.Concat(post.Partition, "/", post.ID, "/");
 				//var storageUrl = _loader.GetFileURI(post.Year, post.Name, file )
 
 				var postSummary = new XElement("div", body.Element("summary").Nodes()).ToString();//.FixLinks(storageUrl).ToString();
@@ -67,7 +67,7 @@ namespace Web404.Uploader
 				
 				post.Title = title;
 				post.Summary = postSummary;
-				post.ArticleBody = postBody;
+				post.Body = postBody;
 				post.Active = true;
 				//post.Tags = tags;
 

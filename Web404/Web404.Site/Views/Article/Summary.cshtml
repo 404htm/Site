@@ -1,11 +1,11 @@
-﻿@model Web404.CMS.PostSummary
+﻿@model IPostSummary
 
 <summary class="panel panel-default sys-panel">
 	<div class="panel-heading">
 		@Model.Date.ToShortDateString() -
 		<h3>@Model.Title</h3><span class="ui-icon ui-icon-newwin"></span>
 		<span style="float: right;">
-			<a href="@Url.Action("Post", new {id = Model.Name, partition = Model.Year})" class="sys-ajax" data-icon-element="span">
+			<a href="@Url.Action("Post", new {id = Model.SID, partition = Model.Partition})" class="sys-ajax" data-icon-element="span">
 				<span class="glyphicon glyphicon-collapse-down"></span>
 			</a>
 		</span>
@@ -24,9 +24,9 @@
 	</div>
 
 	<div class="tags panel-footer">
-		@*@foreach (var tag in Model.Tags.Split(','))
+		@foreach (var tag in Model.TagList.Split(','))
 		{
 			<span>@tag</span>
-		}*@
+		}
 	</div>
 </summary>

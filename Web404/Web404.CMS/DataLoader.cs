@@ -66,7 +66,7 @@ namespace Web404.AzureCMS
 
 			using (var db = new Context(_cnn))
             {
-				db.PostSummaries.Attach(post);
+				db.Posts.Attach(post);
 				db.SaveChanges();
 			}
 

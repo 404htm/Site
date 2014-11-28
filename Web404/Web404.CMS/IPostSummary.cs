@@ -11,7 +11,9 @@ namespace Web404.CMS
 		int PostTypeID { get; set; }
 		string SID { get; set; }
 		string Summary { get; set; }
-		string TagList { get; set; }
+		
 		string Title { get; set; }
+		string TagList { get; }
+
 	}
 }
