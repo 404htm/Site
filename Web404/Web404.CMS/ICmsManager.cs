@@ -13,8 +13,8 @@ namespace Web404.CMS
 		//System.Collections.Generic.List<Page> GetSectionPages(string sectionName);
 		//System.Collections.Generic.List<PageSummary> GetTagArticleSummaries(string tag, int start = 0, int? pageCount = null);
 
-		string GetPostContent(string Partition, string ID);
+		string GetPostContent(string Partition, string Name);
 
-		PostDetail GetPost(string partition, string ID);
+		Post GetPost(string partition, string ID);
 	}
 }

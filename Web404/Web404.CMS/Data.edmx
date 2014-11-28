@@ -64,6 +64,26 @@
           <Property Name="Referer" Type="varchar(max)" />
           <Property Name="UserAgent" Type="varchar(max)" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view '404htm.dbo.PostSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PostSummary">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Active" />
+            <PropertyRef Name="PostTypeID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="SID" Type="varchar" MaxLength="100" />
+          <Property Name="Partition" Type="char" MaxLength="4" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="Summary" Type="nvarchar(max)" />
+          <Property Name="Body" Type="nvarchar(max)" />
+          <Property Name="PostTypeID" Type="int" Nullable="false" />
+          <Property Name="TagList" Type="nvarchar(max)" />
+        </EntityType>
         <Association Name="FK_PageTags_Posts">
           <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
           <End Role="PostTags" Type="Self.PostTags" Multiplicity="*" />
@@ -107,6 +127,20 @@
           <EntitySet Name="PostType" EntityType="Self.PostType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VisitorLog" EntityType="Self.VisitorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostSummary" EntityType="Self.PostSummary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PostSummary].[ID] AS [ID], 
+    [PostSummary].[Date] AS [Date], 
+    [PostSummary].[Active] AS [Active], 
+    [PostSummary].[SID] AS [SID], 
+    [PostSummary].[Partition] AS [Partition], 
+    [PostSummary].[Title] AS [Title], 
+    [PostSummary].[Summary] AS [Summary], 
+    [PostSummary].[Body] AS [Body], 
+    [PostSummary].[PostTypeID] AS [PostTypeID], 
+    [PostSummary].[TagList] AS [TagList]
+    FROM [dbo].[PostSummary] AS [PostSummary]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_PageTags_Posts" Association="Self.FK_PageTags_Posts">
             <End Role="Posts" EntitySet="Posts" />
             <End Role="PostTags" EntitySet="PostTags" />
@@ -138,6 +172,7 @@
             <End Role="Post" EntitySet="Posts" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
+          <EntitySet Name="PostSummaries" EntityType="Data.PostSummary" />
         </EntityContainer>
         <EnumType Name="Type">
           <Member Name="Home" Value="0" />
@@ -217,6 +252,24 @@
           <End Type="Data.Post" Role="Post" Multiplicity="*" />
           <End Type="Data.Tag" Role="Tag" Multiplicity="*" />
         </Association>
+        <EntityType Name="PostSummary">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Active" />
+            <PropertyRef Name="PostTypeID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="SID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Partition" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostTypeID" Type="Int32" Nullable="false" />
+          <Property Name="TagList" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -287,6 +340,22 @@
               <ScalarProperty Name="ID" ColumnName="PostID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="PostSummaries">
+            <EntityTypeMapping TypeName="Data.PostSummary">
+              <MappingFragment StoreEntitySet="PostSummary">
+                <ScalarProperty Name="TagList" ColumnName="TagList" />
+                <ScalarProperty Name="PostTypeID" ColumnName="PostTypeID" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Partition" ColumnName="Partition" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

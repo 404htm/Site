@@ -83,6 +83,9 @@
     <Compile Include="Post.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="PostSummary.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="PostType.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>

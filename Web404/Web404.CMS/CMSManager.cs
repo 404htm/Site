@@ -35,32 +35,32 @@ namespace Web404.CMS
         }
 
 
-		public List<PageSummary> GetTagArticleSummaries(string tag, int start = 0, int? pageCount = null)
-		{
-			using (var db = new Context(_cnn))
-			{
-				var take = pageCount ?? DEFAULT_PAGE_COUNT;
+		//public List<PageSummary> GetTagArticleSummaries(string tag, int start = 0, int? pageCount = null)
+		//{
+		//	using (var db = new Context(_cnn))
+		//	{
+		//		var take = pageCount ?? DEFAULT_PAGE_COUNT;
 
-				return db
-				.Posts
-				.Where(p => p.Tags.Where(t => t.Name == tag).Any())
-				.Where(p => p.Active)
-				.OrderByDescending(p => p.Date)
-				.Skip(() => start)
-				.Take(() => take)
-				.Select(p => new PageSummary
-				{
-					Summary = p.Summary,
-					Date = p.Date,
-					ID = p.ID,
-					Tags = p.Tags.ToList(),
-					Section = p.PostType.Name,
-					Title = p.Title,
-					URLName = p.URLName
-				})
-				.ToList();
-			}
-		}
+		//		return db
+		//		.Posts
+		//		.Where(p => p.Tags.Where(t => t.Name == tag).Any())
+		//		.Where(p => p.Active)
+		//		.OrderByDescending(p => p.Date)
+		//		.Skip(() => start)
+		//		.Take(() => take)
+		//		.Select(p => new PageSummary
+		//		{
+		//			Summary = p.Summary,
+		//			Date = p.Date,
+		//			ID = p.ID,
+		//			Tags = p.Tags.ToList(),
+		//			Section = p.PostType.Name,
+		//			Title = p.Title,
+		//			URLName = p.URLName
+		//		})
+		//		.ToList();
+		//	}
+		//}
 
 		//public Post GetSectionDefaultPage(string sectionName)
 		//{
@@ -86,23 +86,12 @@ namespace Web404.CMS
 		//	}
 		//}
 
-		public PostDetail GetPost(string year, string pageUrl)
+		public Post GetPost(string partition, string pageUrl)
 		{
 			using (var db = new Context(_cnn))
 			{
 				return db.Posts
-				.Select(p => new PostDetail
-				{
-					Summary = p.Summary,
-					Date = p.Date,
-					ID = p.ID,
-					Tags = p.Tags.Select(t => t.Name).ToList(),
-					//Section = p.Section.Name,
-					Title = p.Title,
-					Name = p.URLName
-
-				})
-				.SingleOrDefault(p => p.Name == pageUrl && p.Year == year && p.Active);
+				.SingleOrDefault(p => p.SID == pageUrl && p.Partition == partition && p.Active);
 			}
 		}
 
@@ -121,22 +110,11 @@ namespace Web404.CMS
 			{
 				var take = pageCount ?? DEFAULT_PAGE_COUNT;
 
-				return db.Posts
+				return db.PostSummaries
 				.OrderByDescending(p => p.Date)
 				.Where(p => p.Active)
 				.Skip(() => start)
 				.Take(() => take)
-				.Select(p => new PostSummary
-					{
-						Summary = p.Summary,
-						//IsComplete = p.Summary == null,
-						Date = p.Date,
-						ID = p.ID,
-						Tags = p.Tags.Select(t => t.Name).ToList(),
-						//Section = p.Section.Name,
-						Title = p.Title,
-						Name = p.URLName
-					})
 				.ToList();
 			}
 		}
