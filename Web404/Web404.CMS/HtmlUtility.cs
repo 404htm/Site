@@ -9,19 +9,15 @@ namespace Web404.CMS
 {
 	public static class HtmlUtility
 	{
-		public static XElement FixLinks(this XElement element, string StorageAcctURL)
+		public static XElement FixLinks(this XElement element, Func<string, string> linkConversion)
 		{
-			
-			Uri baseUri = new Uri(StorageAcctURL);
-
 			var images = element.Descendants("img");
 			foreach(var img in images)
 			{
 				var url = (string)img.Attribute("src");
 				if(!IsAbsolute(url))
 				{
-					var fixedLink = new Uri(baseUri, url);
-					img.Attribute("src").Value = fixedLink.ToString();
+					img.Attribute("src").Value = linkConversion(url);
 				}
 			}
 

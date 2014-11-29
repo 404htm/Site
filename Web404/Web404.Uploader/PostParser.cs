@@ -35,7 +35,7 @@ namespace Web404.Uploader
 			{
 				using(var str = file.OpenRead())
 				{
-					//_loader.SaveRelatedFile(post.Year, post.ID, file.Name, str);
+					_loader.SaveRelatedFile(post.Partition, post.SID, file.Name, str);
 				}
 			}
 		}
@@ -59,11 +59,12 @@ namespace Web404.Uploader
 				post.Partition = post.Date.Year.ToString();
 
 
-				string fragment = String.Concat(post.Partition, "/", post.ID, "/");
+				//string fragment = String.Concat(post.Partition, "/", post.ID, "/");
 				//var storageUrl = _loader.GetFileURI(post.Year, post.Name, file )
+				Func<string, string> getUrl = f => _loader.GetFileURI(post.Partition, post.SID, f).ToString();
 
-				var postSummary = new XElement("div", body.Element("summary").Nodes()).ToString();//.FixLinks(storageUrl).ToString();
-				var postBody = new XElement("div", body.Element("article").Nodes()).ToString();//.FixLinks(storageUrl).ToString();
+				var postSummary = new XElement("div", body.Element("summary").Nodes()).FixLinks(getUrl).ToString();
+				var postBody = new XElement("div", body.Element("article").Nodes()).FixLinks(getUrl).ToString();
 				
 				post.Title = title;
 				post.Summary = postSummary;

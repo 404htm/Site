@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.EntityClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -65,11 +67,22 @@ namespace Web404.AzureCMS
 			var tableClient = _acct.CreateCloudTableClient();
 
 			using (var db = new Context(_cnn))
-            {
-				db.Posts.Attach(post);
+			{
+				var id = db.Database.SqlQuery<int?>("select ID from POSTS where SID = @p0 and PARTITION = @p1", post.SID, post.Partition).SingleOrDefault();
+
+				if(id.HasValue)
+				{
+					post.ID = id.Value;
+					db.Posts.Attach(post);
+					db.Entry(post).State = EntityState.Modified;
+				}
+				else
+				{
+					db.Posts.Add(post);
+				}
+				
 				db.SaveChanges();
 			}
-
 		}
 
 		public void SaveRelatedFile(string year, string postID, string fileName, Stream fileBody)
