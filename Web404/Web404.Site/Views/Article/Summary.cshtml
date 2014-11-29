@@ -26,7 +26,8 @@
 	<div class="tags panel-footer">
 		@foreach (var tag in Model.TagList.Split(','))
 		{
-			<span>@tag</span>
+			<span>@Html.ActionLink(tag, "tags", new {id = tag})</span>
+
 		}
 	</div>
 </summary>

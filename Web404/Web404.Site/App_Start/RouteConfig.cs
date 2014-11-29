@@ -21,8 +21,8 @@ namespace Web404.Site
 
 			routes.MapRoute(
 				name: "Tags",
-				url: "{Tags}/{id}",
-				defaults: new { controller = "Home", action = "Tags" }
+				url: "Tags/{id}",
+				defaults: new { controller = "Home", action = "tags" }
 			);
 
             routes.MapRoute(
