@@ -94,9 +94,9 @@ namespace Web404.AzureCMS
 			blob.UploadFromStream(fileBody);
 		}
 
-		public Uri GetFileURI(string year, string postID, string fileName)
+		public Uri GetFileURI(string partition, string sid, string fileName)
 		{
-			return new Uri(_acct.BlobEndpoint, _acct.Credentials.AccountName + "/" + POST_FILE_CONTAINER + "/");
+			return new Uri(_acct.BlobEndpoint, _acct.Credentials.AccountName + "/" + POST_FILE_CONTAINER + "/" + partition + "/" + sid + "/" + fileName);
 		}
 
 
