@@ -8,6 +8,9 @@
 @c-article-bg: #444444;
 @c-special-bg: rgba(50,50,50,.5);
 @c-bright-border:  silver;
+@c-light-button: #444444;
+@c-light-highlight: #555555;
+@c-bright-blue: #428bca;
 
 @margin-default: 15px;
 
@@ -272,19 +275,28 @@ nav li a:hover {
 	height: 22px;
 	line-height: 1em;
 	padding-left: 1em;
-	border-top: 1px solid #222222;
+	//border-top: 1px solid #222222;
 	
 }
 
-.tags span {
-	margin-right: 1px;
-	display: block;
-	float: left;
-	background-color: #444444;
+.tags a {
+	display: inline-block;
+	
 	height: 18px;
 	margin: 1px;
-	line-height: 18px;
-	padding: 1px 4px 1px 4px;
+	margin-left: 0;
+	padding: 3px 8px 5px 8px;
+	border-radius: 3px;
+	background-color:@c-article-header;
+	color: @c-font-article;
+}
+
+.tags a:hover{
+
+	
+	color: white;
+	background-color: @c-bright-blue;
+	text-decoration: none;
 }
 /* Styles for basic forms
 -----------------------------------------------------------*/

@@ -204,17 +204,21 @@ nav li a:hover {
   height: 22px;
   line-height: 1em;
   padding-left: 1em;
-  border-top: 1px solid #222222;
 }
-.tags span {
-  margin-right: 1px;
-  display: block;
-  float: left;
-  background-color: #444444;
+.tags a {
+  display: inline-block;
   height: 18px;
   margin: 1px;
-  line-height: 18px;
-  padding: 1px 4px 1px 4px;
+  margin-left: 0;
+  padding: 3px 8px 5px 8px;
+  border-radius: 3px;
+  background-color: #002c52;
+  color: #c0c0c0;
+}
+.tags a:hover {
+  color: white;
+  background-color: #428bca;
+  text-decoration: none;
 }
 /* Styles for basic forms
 -----------------------------------------------------------*/
