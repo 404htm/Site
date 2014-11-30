@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
+using Web404.CMS;
 
 namespace Web404.Site.Controllers
 {
@@ -35,9 +36,8 @@ namespace Web404.Site.Controllers
 
 		public ActionResult Tags(string id)
 		{
-			//var data = CMS.GetTagArticleSummaries(ID);
-			//return View(data);
-			return View();
+			var data = CMS.GetTagPostSummaries(id).Cast<IPostSummary>().ToList();
+			return View(data);
 		}
 
 		public ActionResult About()

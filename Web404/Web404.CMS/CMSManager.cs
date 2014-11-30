@@ -21,7 +21,7 @@ namespace Web404.CMS
         }
 
 
-        public List<Post> GetPosts(int start = 0, int? pageCount = null)
+        public IList<Post> GetPosts(int start = 0, int? pageCount = null)
         {
             using (var db = new Context(_cnn))
             {
@@ -35,32 +35,24 @@ namespace Web404.CMS
         }
 
 
-		//public List<PageSummary> GetTagArticleSummaries(string tag, int start = 0, int? pageCount = null)
-		//{
-		//	using (var db = new Context(_cnn))
-		//	{
-		//		var take = pageCount ?? DEFAULT_PAGE_COUNT;
+		public IList<PostSummary> GetTagPostSummaries(string tag, int start = 0, int? pageCount = null)
+		{
+			using (var db = new Context(_cnn))
+			{
+				var take = pageCount ?? DEFAULT_PAGE_COUNT;
+				
+				var summaries = db.Tags
+					.Where(t => t.Name == tag)
+					.SelectMany(t => t.Posts)
+					.Join(db.PostSummaries, ps => ps.ID, p => p.ID, (p, ps) => ps)
+					.OrderByDescending(ps => ps.Date)
+					.Skip(start)
+					.Take(take)
+					.ToList();
 
-		//		return db
-		//		.Posts
-		//		.Where(p => p.Tags.Where(t => t.Name == tag).Any())
-		//		.Where(p => p.Active)
-		//		.OrderByDescending(p => p.Date)
-		//		.Skip(() => start)
-		//		.Take(() => take)
-		//		.Select(p => new PageSummary
-		//		{
-		//			Summary = p.Summary,
-		//			Date = p.Date,
-		//			ID = p.ID,
-		//			Tags = p.Tags.ToList(),
-		//			Section = p.PostType.Name,
-		//			Title = p.Title,
-		//			URLName = p.URLName
-		//		})
-		//		.ToList();
-		//	}
-		//}
+				return summaries;
+			}
+		}
 
 		//public Post GetSectionDefaultPage(string sectionName)
 		//{
@@ -104,18 +96,20 @@ namespace Web404.CMS
 			}
 		}
 
-		public IEnumerable<PostSummary> GetPostSummaries(int start = 0, int? pageCount = null)
+		public IList<PostSummary> GetPostSummaries(int start = 0, int? pageCount = null)
 		{
 			using (var db = new Context(_cnn))
 			{
 				var take = pageCount ?? DEFAULT_PAGE_COUNT;
 
-				return db.PostSummaries
+				var results = db.PostSummaries
 				.OrderByDescending(p => p.Date)
 				.Where(p => p.Active)
 				.Skip(() => start)
 				.Take(() => take)
 				.ToList();
+
+				return results;
 			}
 		}
 
