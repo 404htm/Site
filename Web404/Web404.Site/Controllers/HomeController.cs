@@ -33,12 +33,12 @@ namespace Web404.Site.Controllers
 			
 		}
 
-
 		public ActionResult Tags(string id)
 		{
 			var data = CMS.GetTagPostSummaries(id).Cast<IPostSummary>().ToList();
 			return View(data);
 		}
+
 
 		public ActionResult About()
 		{

@@ -82,8 +82,12 @@ namespace Web404.CMS
 		{
 			using (var db = new Context(_cnn))
 			{
+				//Enumerate so the include isn't ignored
 				return db.Posts
-				.SingleOrDefault(p => p.SID == pageUrl && p.Partition == partition && p.Active);
+				.Include("Tags")
+				.Where(p => p.SID == pageUrl && p.Partition == partition && p.Active)
+				.ToList()
+				.SingleOrDefault();
 			}
 		}
 
@@ -91,8 +95,13 @@ namespace Web404.CMS
 		{
 			using (var db = new Context(_cnn))
 			{
+				//Enumerate so the include isn't ignored
 				return db.Posts
-				.SingleOrDefault(p => p.ID == PageID && p.Active);
+				.Include("Tags")
+				.Where(p => p.ID == PageID && p.Active)
+				.ToList()
+				.SingleOrDefault();
+				
 			}
 		}
 
@@ -113,9 +122,15 @@ namespace Web404.CMS
 			}
 		}
 
-		public string GetPostContent(string year, string title)
+		public string GetPostContent(string partition, string sid)
 		{
-			return _fileManager.GetPostContent(year, title);
+			using (var db = new Context(_cnn))
+			{
+				return db.Posts
+				.Where(p => p.SID == sid && p.Partition == partition && p.Active)
+				.Select(p => p.Body)
+				.SingleOrDefault();
+			}
 		}
 	}
 }

@@ -91,9 +91,14 @@ header h1
 
 .transition{
 	-moz-transition: color .5s;
-			-o-transition: color .5s;
-			-webkit-transition: color .5s;
-			transition: color .5s;
+	-o-transition: color .5s;
+	-webkit-transition: color .5s;
+	transition: color .5s;
+
+	-moz-transition: background-color .5s;
+	-o-transition: background-color .5s;
+	-webkit-transition: background-color .5s;
+	transition: background-color .5s;
 }
 
 h1, h2, h3, h4 {
@@ -274,12 +279,20 @@ nav li a:hover {
 	font-style: italic;
 	height: 22px;
 	line-height: 1em;
+	padding: 3px;
 	padding-left: 1em;
+	margin-right: @margin-default;
 	//border-top: 1px solid #222222;
 	
 }
 
-.tags a {
+.panel-body {
+	border-bottom: 1px solid @c-special-header;
+}
+
+
+
+a.tag, a.linkbutton {
 	display: inline-block;
 	
 	height: 18px;
@@ -289,14 +302,21 @@ nav li a:hover {
 	border-radius: 3px;
 	background-color:@c-article-header;
 	color: @c-font-article;
+	.transition
 }
 
-.tags a:hover{
+a.tag:hover, a.linkbutton:hover{
 
 	
 	color: white;
-	background-color: @c-bright-blue;
+	background-color: lighten(@c-article-header, 10%);
 	text-decoration: none;
+	.transition
+}
+
+.continue
+{
+	float: right;
 }
 /* Styles for basic forms
 -----------------------------------------------------------*/
@@ -535,4 +555,8 @@ article p, summary p{
 .summary-body{
 	float: left;
 	margin: 5px;
+}
+
+.post-footer{
+	height: 25px;
 }

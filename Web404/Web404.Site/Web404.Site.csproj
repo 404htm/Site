@@ -195,8 +195,9 @@
     <Content Include="Views\Home\Tools.cshtml" />
     <Content Include="Views\Home\Projects.cshtml" />
     <Content Include="Views\Article\Index.cshtml" />
-    <Content Include="Views\Article\Summary.cshtml" />
+    <Content Include="Views\Home\Summary.cshtml" />
     <Content Include="Views\Home\Tags.cshtml" />
+    <Content Include="Views\Home\Post.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

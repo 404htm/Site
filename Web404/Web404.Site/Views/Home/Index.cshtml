@@ -8,7 +8,7 @@
 
 @foreach (var summary in Model)
 {
-	Html.RenderPartial("~/Views/Article/Summary.cshtml",summary);
+	Html.RenderPartial("summary",summary);
 	//Response.Flush();
 }
 
