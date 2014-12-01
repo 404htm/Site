@@ -12,9 +12,12 @@ var sys = new function () {
 	var close_icon = "glyphicon-collapse-up";
 
 	this.start = function() {
-			$(".sys-ajax").on("click", sys.ajaxLoad);
-			this.setupTagGraph();
-			updateSection($("body"));
+		$(".sys-ajax").on("click", sys.ajaxLoad);
+		$(".sys-panel").on("open", function () { $(this).find(".continue").hide(); });
+		$(".sys-panel").on("close", function () { $(this).find(".continue").show(); });
+
+		this.setupTagGraph();
+		updateSection($("body"));
 	};
 
 	this.ajaxLoad = function (evnt) {
@@ -34,7 +37,8 @@ var sys = new function () {
 			el.bind("click", collapse);
 
 			var icon_loc = el.data("icon-element");
-			if(icon_loc) el.find(icon_loc).removeClass(open_icon).addClass(close_icon);
+			if (icon_loc) el.find(icon_loc).removeClass(open_icon).addClass(close_icon);
+			target.trigger("open");
 		});
 		
 		
@@ -52,6 +56,7 @@ var sys = new function () {
 		var icon_loc = el.data("icon-element");
 		if (icon_loc)  el.find(icon_loc).removeClass(close_icon).addClass(open_icon);
 
+		target.trigger("close");
 		return false;
 	}
 
@@ -60,7 +65,6 @@ var sys = new function () {
 		//TODO: Explicit target
 		return target;
 	}
-
 
 	this.setupTagGraph = function() 
 	{
