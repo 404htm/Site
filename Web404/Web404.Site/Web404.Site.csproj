@@ -128,6 +128,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\original.css" />
+    <Content Include="Content\post.css">
+      <DependentUpon>post.less</DependentUpon>
+    </Content>
     <Content Include="Content\PostFiles\EF.PNG" />
     <Content Include="Content\PostFiles\egg.png" />
     <Content Include="Content\PostFiles\wallpaper_11_18_2013\preview.png" />
@@ -147,6 +150,10 @@
     <Content Include="Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\PostFiles\test.pdf" />
+    <Content Include="Content\post.less" />
+    <Content Include="Content\post.css.map">
+      <DependentUpon>post.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Images\Icons\Contact\email.png" />
     <Content Include="Images\Icons\Contact\github.png" />
@@ -194,7 +201,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Tools.cshtml" />
     <Content Include="Views\Home\Projects.cshtml" />
-    <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Home\Summary.cshtml" />
     <Content Include="Views\Home\Tags.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
