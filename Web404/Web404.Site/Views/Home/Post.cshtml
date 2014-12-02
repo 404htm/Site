@@ -1,0 +1,30 @@
+﻿@model Post
+@{
+	DisplayTitle =  Model.Partition + "/"+ Model.SID.ToLower();
+	PageTitle = "404htm - " + Model.Title;
+}
+<div class="panel panel-default sys-panel" >
+	<div class="panel-heading">
+		@Model.Date.ToShortDateString() -
+		<h3>@Model.Title</h3><span class="ui-icon ui-icon-newwin"></span>
+		<span style="float: right;">
+			@*<a href="@Url.Action("Post", new {id = Model.SID, partition = Model.Partition})" class="sys-ajax" data-icon-element="span">
+				<span class="glyphicon glyphicon-collapse-down"></span>
+			</a>*@
+		</span>
+	</div>
+
+	<div class="panel-body content">
+		@Html.Raw(Model.Summary)
+		@Html.Raw(Model.Body)
+	</div>
+
+	<div class="tags post-footer">
+		@foreach (var tag in Model.TagList.Split(','))
+		{
+			var disp = tag.Trim();
+			<span>@Html.ActionLink(disp, "tags", new {id = disp}, new{ @class = "tag"})</span>
+		}
+	</div>
+
+</div>
