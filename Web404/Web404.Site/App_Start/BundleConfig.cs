@@ -21,7 +21,7 @@ namespace Web404.Site.App_Start
 
             bundles.Add(
 				new StyleBundle("~/Content/Styles")
-					//.Include("~/Content/grid.less")
+					.Include("~/Content/post.css")
 					.Include("~/Content/bootstrap.css")
 					.Include("~/Content/site.css")
 					.Include("~/Content/rainbow.css")

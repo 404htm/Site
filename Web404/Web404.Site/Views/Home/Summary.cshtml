@@ -1,6 +1,6 @@
 ﻿@model IPostSummary
 
-<summary class="panel panel-default sys-panel">
+<div class="panel panel-default sys-panel">
 	<div class="panel-heading">
 		@Model.Date.ToShortDateString() -
 		<h3>@Model.Title</h3><span class="ui-icon ui-icon-newwin"></span>
@@ -11,7 +11,7 @@
 		</span>
 	</div>
 
-	<div class="panel-body">
+	<div class="panel-body content">
 
 		@Html.Raw(Model.Summary)
 
@@ -33,4 +33,4 @@
 		</div>
 	</div>
 
-</summary>
+</div>

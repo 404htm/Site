@@ -66,9 +66,6 @@ header h1 {
   height: 30px;
   line-height: 30px;
 }
-.content {
-  padding: 10px;
-}
 .transition {
   -moz-transition: color .5s;
   -o-transition: color .5s;
