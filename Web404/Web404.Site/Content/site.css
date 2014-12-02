@@ -368,8 +368,8 @@ g.tag:hover rect {
   transition: fill .5s, stroke .5s;
 }
 .contact {
-  -webkit-animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
-  animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  -webkit-animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
   color: white;
   text-decoration: none;
   display: block;
@@ -386,8 +386,8 @@ g.tag:hover rect {
   transition: background-color 0.5s;
 }
 a.contact-email {
-  -webkit-animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
-  animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  -webkit-animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
   color: white;
   text-decoration: none;
   display: block;
@@ -407,8 +407,8 @@ a.contact-email {
   /* For IE 6 and 7 */
 }
 a.contact-so {
-  -webkit-animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
-  animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  -webkit-animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
   color: white;
   text-decoration: none;
   display: block;
@@ -428,8 +428,8 @@ a.contact-so {
   /* For IE 6 and 7 */
 }
 a.contact-li {
-  -webkit-animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
-  animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  -webkit-animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
   color: white;
   text-decoration: none;
   display: block;
@@ -449,8 +449,8 @@ a.contact-li {
   /* For IE 6 and 7 */
 }
 a.contact-github {
-  -webkit-animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
-  animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  -webkit-animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
   color: white;
   text-decoration: none;
   display: block;
@@ -529,8 +529,12 @@ summary p {
   max-width: 60em;
 }
 .colorize {
-  -webkit-animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
-  animation: colorize 2s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  -webkit-animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
+}
+img {
+  -webkit-animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
+  animation: colorize 4s cubic-bezier(0, 0, 0.8, 0.4) 1;
 }
 @-webkit-keyframes colorize {
   0% {
