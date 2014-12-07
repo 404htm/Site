@@ -77,6 +77,7 @@
     </Reference>
     <Reference Include="PKCS12ProtectedConfigurationProvider">
       <HintPath>..\packages\Pkcs12ProtectedConfigurationProvider.1.0.1\lib\NET40\PKCS12ProtectedConfigurationProvider.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
