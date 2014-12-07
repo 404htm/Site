@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="Web404.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-10.2.2">
   <WebRole name="Web404.Site" vmsize="ExtraSmall">
+		<Runtime executionContext="elevated"></Runtime>
     <Sites>
       <Site name="Web">
         <Bindings>
@@ -15,7 +16,7 @@
       <Import moduleName="Diagnostics" />
     </Imports>
     <Certificates>
-      <Certificate name="azureconfig" storeLocation="LocalMachine" storeName="My" />
+      <Certificate name="azureconfig" storeLocation="LocalMachine" storeName="My"/>
     </Certificates>
   </WebRole>
 </ServiceDefinition>
