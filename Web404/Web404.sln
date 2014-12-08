@@ -16,6 +16,11 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Web404.SQL", "Web404.SQL\We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web404.Uploader", "Web404.Uploader\Web404.Uploader.csproj", "{C5E41735-137D-47DF-BAA6-C3EE3574507F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{681DFA5A-A81B-47D5-8C03-F4273A38E020}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ServiceConfiguration serviceName="Web404.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-10.2.2">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Web404.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2014-06.2.4">
   <Role name="Web404.Site">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
     <Certificates>
       <Certificate name="azureconfig" thumbprint="4be022d2954b76b9e41e4907a1bcf97b4b7f0a8f" thumbprintAlgorithm="sha1" />

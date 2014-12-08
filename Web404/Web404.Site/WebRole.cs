@@ -16,12 +16,16 @@ namespace Web404.Site
 			using (var serverManager = new ServerManager())
 			{
 				var mainSite = serverManager.Sites[RoleEnvironment.CurrentRoleInstance.Id + "_Web"];
-				var mainApplication = mainSite.Applications["/"];
-				var mainApplicationPool = serverManager.ApplicationPools[mainApplication.ApplicationPoolName];
-				mainApplicationPool["autoStart"] = true;
-				mainApplicationPool["startMode"] = "AlwaysRunning";
+				if(mainSite != null)
+				{
+					var mainApplication = mainSite.Applications["/"];
+					var mainApplicationPool = serverManager.ApplicationPools[mainApplication.ApplicationPoolName];
+					mainApplicationPool["autoStart"] = true;
+					mainApplicationPool["startMode"] = "AlwaysRunning";
 
-				serverManager.CommitChanges();
+					serverManager.CommitChanges();
+				}
+				
 			}
 
 			base.Run();
