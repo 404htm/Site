@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Web404.CMS
@@ -25,9 +26,10 @@ namespace Web404.CMS
 			return new AzureFileManger(CloudStorageAccount.DevelopmentStorageAccount);
 		}
 
-		public static AzureFileManger CreateDev(CloudStorageAccount acct)
+		public static AzureFileManger Create(string storage_cnn)
 		{
-			return new AzureFileManger(CloudStorageAccount.DevelopmentStorageAccount);
+			var acct = CloudStorageAccount.Parse(storage_cnn);
+			return new AzureFileManger(acct);
 		}
 
 		public void SetupEnvironment()
@@ -36,31 +38,12 @@ namespace Web404.CMS
 
 			var container = blobClient.GetContainerReference(POST_FILE_CONTAINER);
 			container.CreateIfNotExists();
+
+			
 			BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
 			containerPermissions.PublicAccess = BlobContainerPublicAccessType.Blob;
 			container.SetPermissions(containerPermissions);
 		}
-
-		//public void SavePostContent(string year, string postName, string postBody)
-		//{
-		//	var tableClient = _acct.CreateCloudTableClient();
-		//	var blobClient = _acct.CreateCloudBlobClient();
-		//	var container = blobClient.GetContainerReference(POST_CONTAINER);
-		//	var blockName = string.Format("{0}/{1}.html", year, postName);
-		//	var blob = container.GetBlockBlobReference(blockName);
-		//	blob.UploadText(postBody, Encoding.UTF8);
-		//}
-
-
-		//public string GetPostContent(string year, string postName)
-		//{
-		//	var blobClient = _acct.CreateCloudBlobClient();
-		//	var container = blobClient.GetContainerReference(POST_CONTAINER);
-		//	var blockName = string.Format("{0}/{1}.html", year, postName);
-		//	var blob = container.GetBlockBlobReference(blockName);
-
-		//	return blob.DownloadText(Encoding.UTF8);
-		//}
 
 		public void SaveRelatedFile(string year, string postID, string fileName, Stream fileBody)
 		{

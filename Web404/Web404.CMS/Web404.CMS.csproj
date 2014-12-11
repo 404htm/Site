@@ -95,7 +95,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Data.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataLoader.cs" />
+    <Compile Include="AzureDataLoader.cs" />
     <Compile Include="ErrorLog.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
